@@ -31,7 +31,7 @@ public extension Color {
     static let wfMainBlue = Color(hex: "#007AFF")
     static let wfAlphaBlue = Color(hex: "#007AFF", opacity: 0.5)
     static let wfBackgroundGray = Color(hex: "#FAFBFF")
-    static let wfLightGray = Color("#D9D9D9")
-    static let wfGray = Color("#ADADAD")
-    static let wfBlueGray = Color("#AAB6D4")
+    static let wfLightGray = Color(hex: "#D9D9D9")
+    static let wfGray = Color(hex: "#ADADAD")
+    static let wfBlueGray = Color(hex: "#AAB6D4")
 }

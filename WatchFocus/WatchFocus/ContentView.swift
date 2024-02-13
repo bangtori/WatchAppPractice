@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var todoStore: TodoStore = TodoStore()
     var body: some View {
         TabBarView()
+            .environmentObject(todoStore)
     }
 }
 
