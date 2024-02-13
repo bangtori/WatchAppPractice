@@ -13,6 +13,7 @@ class TodoStore: ObservableObject {
         let checkCount = todos.filter{ $0.isChecked }.count
         return Double(checkCount) / Double(todos.count)
     }
+    
     init() {
         let todos: [Todo] = [
             Todo(title: "1111", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false),
