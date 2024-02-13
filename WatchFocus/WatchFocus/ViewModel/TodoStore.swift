@@ -8,28 +8,31 @@
 import Foundation
 
 class TodoStore: ObservableObject {
-    @Published var todos: [Todo] = []
+    @Published var todos: [Todo] = [] {
+        didSet {
+            saveTodo()
+        }
+    }
     var progress: Double {
+        if todos.count == 0 { return 0.0 }
         let checkCount = todos.filter{ $0.isChecked }.count
         return Double(checkCount) / Double(todos.count)
     }
     
-    init() {
-        let todos: [Todo] = [
-            Todo(title: "1111", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false),
-            Todo(title: "222", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false),
-            Todo(title: "33333", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false),
-            Todo(title: "44444", deadline: Date().timeIntervalSince1970, createDate: Date().timeIntervalSince1970, isChecked: false)
-        ]
-        self.todos = todos
-    }
+    init() {}
     
     func checkTodo(todoId: String) {
         guard let index = todos.firstIndex(where: {$0.id == todoId }) else { return }
         todos[index].checkTodo()
     }
+    
     func loadTodo() {
-        
+        let decoder:JSONDecoder = JSONDecoder()
+        if let data = UserDefaults.standard.object(forKey: "todo") as? Data{
+            if let saveData = try? decoder.decode([Todo].self, from: data){
+                todos = saveData
+            }
+        } 
     }
     
     func addTodo(todo: Todo) {
@@ -39,5 +42,12 @@ class TodoStore: ObservableObject {
     func deleteTodo(todoId: String) {
         guard let index = todos.firstIndex(where: {$0.id == todoId }) else { return }
         todos.remove(at: index)
+    }
+    
+    private func saveTodo(){
+        let encoder:JSONEncoder = JSONEncoder()
+        if let encoded = try? encoder.encode(todos){
+            UserDefaults.standard.set(encoded, forKey: "todo")
+        }
     }
 }

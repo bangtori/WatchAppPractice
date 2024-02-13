@@ -61,6 +61,11 @@ struct TodoView: View {
             TodoAddView()
                 .presentationDetents([.medium])
         }
+        .onAppear {
+            DispatchQueue.global().async {
+                todoStore.loadTodo()
+            }
+        }
     }
 }
 
