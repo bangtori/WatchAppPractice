@@ -43,7 +43,7 @@ struct TodoAddView: View {
                     .background(Color.wfMainBlue)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }
-            .alert("리뷰 작성", isPresented: $isShowingAlert) {
+            .alert("할 일 작성", isPresented: $isShowingAlert) {
                 Button("취소", role: .none) {}
                 Button("저장", role: .none) {
                     let newTodo = Todo(title: taskText, deadline: isTimeSet ? deadline.timeIntervalSince1970 : nil, createDate: Date().timeIntervalSince1970, isChecked: false)

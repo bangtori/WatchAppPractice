@@ -34,6 +34,7 @@
 		53ADBDC42B7B56BA009EB5D5 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC32B7B56BA009EB5D5 /* TodoAddView.swift */; };
 		53ADBDC72B7B5733009EB5D5 /* WfProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC62B7B5733009EB5D5 /* WfProgressBar.swift */; };
 		53ADBDC92B7B5778009EB5D5 /* WfTodoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */; };
+		53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		53ADBDC32B7B56BA009EB5D5 /* TodoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddView.swift; sourceTree = "<group>"; };
 		53ADBDC62B7B5733009EB5D5 /* WfProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfProgressBar.swift; sourceTree = "<group>"; };
 		53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfTodoTextField.swift; sourceTree = "<group>"; };
+		53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 				53ADBDAC2B7B3633009EB5D5 /* TabBarView.swift */,
 				53ADBDC22B7B5370009EB5D5 /* Todo */,
 				53ADBDB02B7B36B1009EB5D5 /* TimerView.swift */,
+				53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				53ADBDAF2B7B369E009EB5D5 /* TodoView.swift in Sources */,
 				53ADBDC92B7B5778009EB5D5 /* WfTodoTextField.swift in Sources */,
 				53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */,
+				53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
