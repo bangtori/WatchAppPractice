@@ -35,6 +35,9 @@
 		53ADBDC72B7B5733009EB5D5 /* WfProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC62B7B5733009EB5D5 /* WfProgressBar.swift */; };
 		53ADBDC92B7B5778009EB5D5 /* WfTodoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */; };
 		53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */; };
+		53ADBDD22B7C545B009EB5D5 /* TimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD12B7C545B009EB5D5 /* TimerStore.swift */; };
+		53ADBDD42B7C5470009EB5D5 /* TimerSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */; };
+		53ADBDD62B7C5630009EB5D5 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,9 @@
 		53ADBDC62B7B5733009EB5D5 /* WfProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfProgressBar.swift; sourceTree = "<group>"; };
 		53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfTodoTextField.swift; sourceTree = "<group>"; };
 		53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingView.swift; sourceTree = "<group>"; };
+		53ADBDD12B7C545B009EB5D5 /* TimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStore.swift; sourceTree = "<group>"; };
+		53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSetting.swift; sourceTree = "<group>"; };
+		53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,8 +285,7 @@
 			children = (
 				53ADBDAC2B7B3633009EB5D5 /* TabBarView.swift */,
 				53ADBDC22B7B5370009EB5D5 /* Todo */,
-				53ADBDB02B7B36B1009EB5D5 /* TimerView.swift */,
-				53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */,
+				53ADBDD02B7C5446009EB5D5 /* Timer */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,6 +304,8 @@
 			isa = PBXGroup;
 			children = (
 				53ADBDB82B7B39EA009EB5D5 /* ToDo.swift */,
+				53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */,
+				53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				53ADBDBD2B7B3EB0009EB5D5 /* TodoStore.swift */,
+				53ADBDD12B7C545B009EB5D5 /* TimerStore.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -328,6 +336,15 @@
 				53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		53ADBDD02B7C5446009EB5D5 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				53ADBDB02B7B36B1009EB5D5 /* TimerView.swift */,
+				53ADBDCE2B7C4E1E009EB5D5 /* TimerSettingView.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -558,15 +575,18 @@
 				53ADBDC12B7B42DD009EB5D5 /* Font+Extension.swift in Sources */,
 				53ADBDB42B7B3774009EB5D5 /* Color+Extension.swift in Sources */,
 				53ADBDBC2B7B3BBA009EB5D5 /* Double+Extension.swift in Sources */,
+				53ADBDD62B7C5630009EB5D5 /* UserDefaultsKeys.swift in Sources */,
 				53ADBDB72B7B3970009EB5D5 /* TodoRowView.swift in Sources */,
 				53ADBDC72B7B5733009EB5D5 /* WfProgressBar.swift in Sources */,
 				53ADBDB92B7B39EA009EB5D5 /* ToDo.swift in Sources */,
+				53ADBDD22B7C545B009EB5D5 /* TimerStore.swift in Sources */,
 				53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */,
 				53ADBDAD2B7B3633009EB5D5 /* TabBarView.swift in Sources */,
 				53ADBDAF2B7B369E009EB5D5 /* TodoView.swift in Sources */,
 				53ADBDC92B7B5778009EB5D5 /* WfTodoTextField.swift in Sources */,
 				53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */,
 				53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */,
+				53ADBDD42B7C5470009EB5D5 /* TimerSetting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

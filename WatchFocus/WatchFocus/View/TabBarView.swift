@@ -28,7 +28,7 @@ struct TabBarView: View {
                 Image(systemName: "timer")
                 Text("Timer")
             }
-            .tag(0)
+            .tag(1)
         })
     }
 }

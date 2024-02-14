@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Todo:Identifiable, Codable{
+struct Todo: Identifiable, Codable {
     var id = UUID().uuidString
     let title: String
     let deadline: Double?

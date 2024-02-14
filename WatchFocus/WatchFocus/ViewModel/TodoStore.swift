@@ -28,7 +28,7 @@ class TodoStore: ObservableObject {
     
     func loadTodo() {
         let decoder:JSONDecoder = JSONDecoder()
-        if let data = UserDefaults.standard.object(forKey: "todo") as? Data{
+        if let data = UserDefaults.standard.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
             if let saveData = try? decoder.decode([Todo].self, from: data){
                 todos = saveData
             }
@@ -47,7 +47,7 @@ class TodoStore: ObservableObject {
     private func saveTodo(){
         let encoder:JSONEncoder = JSONEncoder()
         if let encoded = try? encoder.encode(todos){
-            UserDefaults.standard.set(encoded, forKey: "todo")
+            UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.todo.rawValue)
         }
     }
 }

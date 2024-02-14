@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TimerView: View {
+    @EnvironmentObject private var timerStore: TimerStore
+    @State private var isShowingSetting: Bool = false
     var body: some View {
         Form {
             Section("오늘의 공부 시간") {
@@ -33,20 +35,24 @@ struct TimerView: View {
             }
             Section {
                 VStack {
-                    Text("Pomodoro 60/10")
+                    Text("Pomodoro \(timerStore.currentTimer.timerSetting.focusTime/60)m/\(timerStore.currentTimer.timerSetting.restTime/60)m")
                         .font(.wfTitleFont)
                         .foregroundStyle(Color.wfGray)
                     TimerProgressView()
                         .padding()
                         .padding(.bottom)
                     Button {
-                        
+                        if timerStore.isRunning {
+                            timerStore.stopTimer()
+                        } else {
+                            timerStore.startTimer()
+                        }
                     } label: {
-                        Text("START")
+                        Text(timerStore.isRunning ? "STOP" : "START")
                             .frame(width: 150, height: 50)
                             .font(.wfTitleFont)
                             .foregroundStyle(Color.white)
-                            .background(Color.wfAlphaPurple)
+                            .background(timerStore.progressColor)
                             .clipShape(RoundedRectangle(cornerRadius: 40))
                     }
                     .buttonStyle(.plain)
@@ -61,12 +67,34 @@ struct TimerView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button{
-                    
+                    isShowingSetting.toggle()
                 }label: {
                     Image(systemName: "gearshape.fill")
                         .foregroundStyle(Color.wfGray)
                 }
             }
+            
+            ToolbarItem(placement: .topBarLeading) {
+                Button{
+                    timerStore.resetTimer()
+                }label: {
+                    Text("Reset")
+                        .foregroundStyle(Color.wfGray)
+                }
+            }
+        }
+        .alert("타이머 종료", isPresented: $timerStore.isFinish) {
+            Button("확인", role: .none) {
+                timerStore.resetTimer()
+            }
+        }message: {
+            Text("뽀모도로 집중 시간이 끝났습니다.")
+        }
+        .navigationDestination(isPresented: $isShowingSetting) {
+            TimerSettingView()
+        }
+        .onAppear {
+            timerStore.loadTimerSetting()
         }
     }
 }
@@ -74,26 +102,40 @@ struct TimerView: View {
 #Preview {
     NavigationStack {
         TimerView()
+            .environmentObject(TimerStore())
     }
 }
 
 struct TimerProgressView: View {
-    var progress: Double = 0.5
-    var progressColor: Color = .wfMainPurple
+    @EnvironmentObject private var timerStore: TimerStore
+    
+    var progress: Double {
+        let totalTime: Int
+        switch timerStore.currentTimer.timerType {
+        case .focus:
+            totalTime = timerStore.currentTimer.timerSetting.focusTime
+        case .rest:
+            totalTime = timerStore.currentTimer.timerSetting.restTime
+        }
+        if totalTime == 0 {
+            return 0.0
+        }
+        return Double(timerStore.remainTime) / Double(totalTime)
+    }
     var body: some View {
         ZStack {
             Circle()
                 .stroke(Color.wfLightGray, lineWidth: 20)
             VStack {
-                Text("Session 1")
+                Text("Session \(timerStore.currentTimer.currentIterationCount)")
                     .font(.wfBody1Font)
-                    .foregroundStyle(progressColor)
-                Text("00:00:00")
+                    .foregroundStyle(timerStore.progressColor)
+                Text(timerStore.remainTimeFormatting)
                     .font(.wfLargeTitleFont)
             }
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(progressColor, style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                .stroke(timerStore.progressColor, style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .rotationEffect(Angle(degrees: -90))
         }
     }

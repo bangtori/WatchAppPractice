@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimerSettingView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var timerStore: TimerStore
     @State private var focusTimeValue = 50.0
     @State private var restTimeValue = 10.0
     @State private var iterationCount = 1
@@ -45,7 +46,7 @@ struct TimerSettingView: View {
                     .foregroundStyle(Color.wfLightGray)
                 Slider(value: $restTimeValue, in: 0...30, step: 5)
                     .tint(Color.wfMainBlue)
-                Text("120")
+                Text("30")
                     .font(.wfCalloutFont)
                     .foregroundStyle(Color.wfLightGray)
             }
@@ -95,6 +96,10 @@ struct TimerSettingView: View {
             .alert("타이머 설정", isPresented: $isShowingAlert) {
                 Button("취소", role: .none) {}
                 Button("저장", role: .none) {
+                    let focusTime = Int(focusTimeValue) * 60
+                    let restTime = Int(restTimeValue) * 60
+                    let newSetting = TimerSetting(focusTime: focusTime, restTime: restTime, iterationCount: iterationCount)
+                    timerStore.updateSetting(setting: newSetting)
                     dismiss()
                 }
             }message: {
@@ -103,11 +108,19 @@ struct TimerSettingView: View {
         }
         .padding()
         .navigationTitle("Timer Setting")
+        .onAppear {
+            timerStore.loadTimerSetting()
+            focusTimeValue = Double(timerStore.currentTimer.timerSetting.focusTime) / 60.0
+            restTimeValue = Double(timerStore.currentTimer.timerSetting.restTime) / 60.0
+            iterationCount = timerStore.currentTimer.timerSetting.iterationCount
+            
+        }
     }
 }
 
 #Preview {
     NavigationStack {
         TimerSettingView()
+            .environmentObject(TimerStore())
     }
 }
