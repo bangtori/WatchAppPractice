@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		536BBFE62B82EA54005C5AEB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BBFE52B82EA54005C5AEB /* Int+Extension.swift */; };
 		536BBFE82B82EA97005C5AEB /* TotalFocusTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BBFE72B82EA97005C5AEB /* TotalFocusTimeService.swift */; };
+		536BC0A92B839D26005C5AEB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BC0A82B839D26005C5AEB /* Int+Extension.swift */; };
+		536BC0AA2B839D2F005C5AEB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BC0A82B839D26005C5AEB /* Int+Extension.swift */; };
 		53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */; };
 		53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD522B7B354D009EB5D5 /* ContentView.swift */; };
 		53ADBD552B7B354E009EB5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53ADBD542B7B354E009EB5D5 /* Assets.xcassets */; };
@@ -95,8 +96,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		536BBFE52B82EA54005C5AEB /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		536BBFE72B82EA97005C5AEB /* TotalFocusTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalFocusTimeService.swift; sourceTree = "<group>"; };
+		536BC0A82B839D26005C5AEB /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFocusApp.swift; sourceTree = "<group>"; };
 		53ADBD522B7B354D009EB5D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -309,7 +310,7 @@
 				53ADBDB32B7B3774009EB5D5 /* Color+Extension.swift */,
 				53ADBDBB2B7B3BBA009EB5D5 /* Double+Extension.swift */,
 				53ADBDC02B7B42DD009EB5D5 /* Font+Extension.swift */,
-				536BBFE52B82EA54005C5AEB /* Int+Extension.swift */,
+				536BC0A82B839D26005C5AEB /* Int+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -583,9 +584,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				536BBFE62B82EA54005C5AEB /* Int+Extension.swift in Sources */,
 				53ADBDB12B7B36B1009EB5D5 /* TimerView.swift in Sources */,
 				536BBFE82B82EA97005C5AEB /* TotalFocusTimeService.swift in Sources */,
+				536BC0A92B839D26005C5AEB /* Int+Extension.swift in Sources */,
 				53ADBDBE2B7B3EB0009EB5D5 /* TodoStore.swift in Sources */,
 				53ADBDC42B7B56BA009EB5D5 /* TodoAddView.swift in Sources */,
 				53ADBDC12B7B42DD009EB5D5 /* Font+Extension.swift in Sources */,
@@ -627,6 +628,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536BC0AA2B839D2F005C5AEB /* Int+Extension.swift in Sources */,
 				53ADBD7B2B7B354E009EB5D5 /* ContentView.swift in Sources */,
 				53ADBD792B7B354E009EB5D5 /* WatchFocusApp.swift in Sources */,
 			);
