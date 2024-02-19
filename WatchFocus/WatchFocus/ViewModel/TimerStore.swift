@@ -13,23 +13,22 @@ class TimerStore: ObservableObject {
             saveTimerSetting()
         }
     }
-    @Published var isFinish: Bool = false
-    @Published var remainTime: Int = 0
+    @Published var isFinish: Bool = false {
+        willSet {
+            if newValue == true {
+                saveTotalFocusUserDefaults()
+            }
+        }
+    }
     @Published var isRunning: Bool = false
-    
-    private var timer: Timer?
+    @Published var remainTime: Int = 0
+    @Published var totalFocusTime: Int = UserDefaults.standard.integer(forKey: UserDefaultsKeys.totalFocusTime.rawValue)
     
     var progressColor: Color {
         return currentTimer.timerType == .focus ? .wfMainPurple : .wfMainBlue
     }
     
-    var remainTimeFormatting :String {
-        var seconds = remainTime
-        let mins = (seconds % 3600) / 60
-        let hours = seconds / 3600
-        seconds = seconds % 60
-        return NSString(format: "%02d:%02d:%02d", hours, mins, seconds) as String
-    }
+    private var timer: Timer?
     
     func updateSetting(setting: TimerSetting) {
         let newTimer = CurretTimer(timer: setting, currentIterationCount: 0, timerType: .rest)
@@ -59,6 +58,7 @@ class TimerStore: ObservableObject {
     func progressTimer(){
         if remainTime > 0{
             remainTime -= 1
+            totalFocusTime += 1
         }else{
             finishSession()
         }
@@ -67,6 +67,7 @@ class TimerStore: ObservableObject {
     func stopTimer(){
         timer?.invalidate()
         isRunning = false
+        saveTotalFocusUserDefaults()
     }
     
     func resetTimer(){
@@ -103,4 +104,11 @@ class TimerStore: ObservableObject {
             currentTimer.currentIterationCount += 1
         }
     }
+    
+    private func saveTotalFocusUserDefaults() {
+        TotalFocusTimeService.shared.checkRestFocusTime()
+        UserDefaults.standard.setValue(totalFocusTime, forKey: UserDefaultsKeys.totalFocusTime.rawValue)
+        UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: UserDefaultsKeys.lastDateSaveTime.rawValue)
+    }
 }
+

@@ -12,8 +12,8 @@ struct TimerView: View {
     @State private var isShowingSetting: Bool = false
     var body: some View {
         Form {
-            Section("오늘의 공부 시간") {
-                Text("00:00:00")
+            Section("오늘의 집중 시간") {
+                Text(timerStore.totalFocusTime.timeFormatting())
                     .font(.wfLargeTitleFont)
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -130,7 +130,7 @@ struct TimerProgressView: View {
                 Text("Session \(timerStore.currentTimer.currentIterationCount)")
                     .font(.wfBody1Font)
                     .foregroundStyle(timerStore.progressColor)
-                Text(timerStore.remainTimeFormatting)
+                Text(timerStore.remainTime.timeFormatting())
                     .font(.wfLargeTitleFont)
             }
             Circle()

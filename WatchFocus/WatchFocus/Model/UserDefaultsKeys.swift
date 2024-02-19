@@ -10,4 +10,6 @@ import Foundation
 enum UserDefaultsKeys: String, Codable {
     case todo
     case timer
+    case totalFocusTime
+    case lastDateSaveTime
 }

@@ -12,6 +12,9 @@ struct WatchFocusApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    TotalFocusTimeService.shared.checkRestFocusTime()
+                }
         }
     }
 }
