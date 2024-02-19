@@ -21,7 +21,6 @@ class TimerStore: ObservableObject {
         }
     }
     @Published var isRunning: Bool = false
-    @Published var remainTime: Int = 0
     @Published var totalFocusTime: Int = UserDefaults.standard.integer(forKey: UserDefaultsKeys.totalFocusTime.rawValue)
     
     var progressColor: Color {
@@ -31,7 +30,7 @@ class TimerStore: ObservableObject {
     private var timer: Timer?
     
     func updateSetting(setting: TimerSetting) {
-        let newTimer = CurretTimer(timer: setting, currentIterationCount: 0, timerType: .rest)
+        let newTimer = CurretTimer(timer: setting, currentIterationCount: 0, timerType: .rest, remainTime: 0)
         currentTimer = newTimer
         
     }
@@ -45,7 +44,7 @@ class TimerStore: ObservableObject {
     }
     
     func startTimer(){
-        if remainTime == 0 {
+        if currentTimer.remainTime == 0 {
             toggleTimerType()
         }
         isRunning = true
@@ -56,8 +55,8 @@ class TimerStore: ObservableObject {
     }
     
     func progressTimer(){
-        if remainTime > 0{
-            remainTime -= 1
+        if currentTimer.remainTime > 0{
+            currentTimer.remainTime -= 1
             totalFocusTime += 1
         }else{
             finishSession()
@@ -71,7 +70,7 @@ class TimerStore: ObservableObject {
     }
     
     func resetTimer(){
-        remainTime = 0
+        currentTimer.remainTime = 0
         currentTimer.currentIterationCount = 0
         currentTimer.timerType = .rest
         stopTimer()
@@ -97,10 +96,10 @@ class TimerStore: ObservableObject {
         switch currentTimer.timerType {
         case .focus:
             currentTimer.timerType = .rest
-            remainTime = currentTimer.timerSetting.restTime
+            currentTimer.remainTime = currentTimer.timerSetting.restTime
         case .rest:
             currentTimer.timerType = .focus
-            remainTime = currentTimer.timerSetting.focusTime
+            currentTimer.remainTime = currentTimer.timerSetting.focusTime
             currentTimer.currentIterationCount += 1
         }
     }
@@ -111,4 +110,3 @@ class TimerStore: ObservableObject {
         UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: UserDefaultsKeys.lastDateSaveTime.rawValue)
     }
 }
-

@@ -120,7 +120,7 @@ struct TimerProgressView: View {
         if totalTime == 0 {
             return 0.0
         }
-        return Double(timerStore.remainTime) / Double(totalTime)
+        return Double(timerStore.currentTimer.remainTime) / Double(totalTime)
     }
     var body: some View {
         ZStack {
@@ -130,7 +130,7 @@ struct TimerProgressView: View {
                 Text("Session \(timerStore.currentTimer.currentIterationCount)")
                     .font(.wfBody1Font)
                     .foregroundStyle(timerStore.progressColor)
-                Text(timerStore.remainTime.timeFormatting())
+                Text(timerStore.currentTimer.remainTime.timeFormatting())
                     .font(.wfLargeTitleFont)
             }
             Circle()

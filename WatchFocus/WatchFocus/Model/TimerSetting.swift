@@ -11,11 +11,13 @@ struct CurretTimer: Codable {
     let timerSetting: TimerSetting
     var currentIterationCount: Int
     var timerType: TimerType
+    var remainTime: Int
     
-    init(timer: TimerSetting = TimerSetting(focusTime: 50 * 60, restTime: 10 * 60, iterationCount: 1), currentIterationCount: Int = 0, timerType: TimerType = .rest) {
+    init(timer: TimerSetting = TimerSetting(focusTime: 50 * 60, restTime: 10 * 60, iterationCount: 1), currentIterationCount: Int = 0, timerType: TimerType = .rest, remainTime: Int = 0) {
         self.timerSetting = timer
         self.currentIterationCount = currentIterationCount
         self.timerType = timerType
+        self.remainTime = remainTime
     }
 }
 
