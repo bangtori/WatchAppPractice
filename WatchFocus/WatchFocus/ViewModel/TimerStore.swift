@@ -23,10 +23,6 @@ class TimerStore: ObservableObject {
     @Published var isRunning: Bool = false
     @Published var totalFocusTime: Int = UserDefaults.standard.integer(forKey: UserDefaultsKeys.totalFocusTime.rawValue)
     
-    var progressColor: Color {
-        return currentTimer.timerType == .focus ? .wfMainPurple : .wfMainBlue
-    }
-    
     private var timer: Timer?
     
     func updateSetting(setting: TimerSetting) {

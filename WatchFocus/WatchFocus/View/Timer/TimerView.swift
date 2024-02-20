@@ -10,6 +10,10 @@ import SwiftUI
 struct TimerView: View {
     @EnvironmentObject private var timerStore: TimerStore
     @State private var isShowingSetting: Bool = false
+    
+    var progressColor: Color {
+        return timerStore.currentTimer.timerType == .focus ? .wfMainPurple : .wfMainBlue
+    }
     var body: some View {
         Form {
             Section("오늘의 집중 시간") {
@@ -38,7 +42,7 @@ struct TimerView: View {
                     Text("Pomodoro \(timerStore.currentTimer.timerSetting.focusTime/60)m/\(timerStore.currentTimer.timerSetting.restTime/60)m")
                         .font(.wfTitleFont)
                         .foregroundStyle(Color.wfGray)
-                    TimerProgressView()
+                    WfTimerProgressView(currentTimer: $timerStore.currentTimer)
                         .padding()
                         .padding(.bottom)
                     Button {
@@ -52,10 +56,11 @@ struct TimerView: View {
                             .frame(width: 150, height: 50)
                             .font(.wfTitleFont)
                             .foregroundStyle(Color.white)
-                            .background(timerStore.progressColor)
+                            .background(progressColor)
                             .clipShape(RoundedRectangle(cornerRadius: 40))
+
                     }
-                    .buttonStyle(.plain)
+                    
                 }
             }
             .listRowBackground(Color.wfBackgroundGray)
@@ -103,40 +108,5 @@ struct TimerView: View {
     NavigationStack {
         TimerView()
             .environmentObject(TimerStore())
-    }
-}
-
-struct TimerProgressView: View {
-    @EnvironmentObject private var timerStore: TimerStore
-    
-    var progress: Double {
-        let totalTime: Int
-        switch timerStore.currentTimer.timerType {
-        case .focus:
-            totalTime = timerStore.currentTimer.timerSetting.focusTime
-        case .rest:
-            totalTime = timerStore.currentTimer.timerSetting.restTime
-        }
-        if totalTime == 0 {
-            return 0.0
-        }
-        return Double(timerStore.currentTimer.remainTime) / Double(totalTime)
-    }
-    var body: some View {
-        ZStack {
-            Circle()
-                .stroke(Color.wfLightGray, lineWidth: 20)
-            VStack {
-                Text("Session \(timerStore.currentTimer.currentIterationCount)")
-                    .font(.wfBody1Font)
-                    .foregroundStyle(timerStore.progressColor)
-                Text(timerStore.currentTimer.remainTime.timeFormatting())
-                    .font(.wfLargeTitleFont)
-            }
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(timerStore.progressColor, style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                .rotationEffect(Angle(degrees: -90))
-        }
     }
 }
