@@ -2,7 +2,7 @@
 //  Int+Extension.swift
 //  WatchFocus
 //
-//  Created by 방유빈 on 2024/02/19.
+//  Created by 방유빈 on 2024/02/20.
 //
 
 import Foundation
@@ -16,3 +16,4 @@ extension Int {
         return NSString(format: "%02d:%02d:%02d", hours, mins, seconds) as String
     }
 }
+

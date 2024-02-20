@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var todoStore: TodoStore = TodoStore()
+    
+    @State private var selectedTab = 0
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        TabView(selection: $selectedTab,
+                content:  {
+            NavigationStack {
+                TodoView()
+            }
+            .tag(0)
+            
+            NavigationStack {
+                TimerView()
+            }
+            .tag(1)
+        })
+        .environmentObject(todoStore)
     }
 }
 
