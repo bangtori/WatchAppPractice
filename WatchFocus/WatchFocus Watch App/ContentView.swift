@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var todoStore: TodoStore = TodoStore()
+    @StateObject private var timerStore: TimerStore = TimerStore()
     
     @State private var selectedTab = 0
     var body: some View {
@@ -20,11 +21,12 @@ struct ContentView: View {
             .tag(0)
             
             NavigationStack {
-                TimerSettingView()
+                TimerView()
             }
             .tag(1)
         })
         .environmentObject(todoStore)
+        .environmentObject(timerStore)
     }
 }
 

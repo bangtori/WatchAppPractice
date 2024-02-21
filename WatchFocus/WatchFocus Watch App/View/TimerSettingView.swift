@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TimerSettingView: View {
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var timerStore: TimerStore
+    @State private var isShowingAlert: Bool = false
     @State private var isShowingTimerView: Bool = false
     @State private var focusSelectedIndex: Int = 0
     @State private var restSelectedIndex: Int = 0
@@ -56,17 +59,33 @@ struct TimerSettingView: View {
             
             Spacer()
             Button {
-                isShowingTimerView.toggle()
+                let timerSetting = TimerSetting(focusTime: focusTimeList[focusSelectedIndex] * 60, restTime: restTimeList[restSelectedIndex] * 60, iterationCount: iterationCountList[iterationSelectedIndex])
+                timerStore.updateSetting(setting: timerSetting)
+                dismiss()
             } label: {
-                Text("시작")
+                Text("저장")
                     .bold()
             }
             .padding()
         }
         .navigationTitle("Timer Setting")
-        .navigationDestination(isPresented: $isShowingTimerView) {
-            let currentTimer = CurretTimer(timer: TimerSetting(focusTime: focusTimeList[focusSelectedIndex] * 60, restTime: restTimeList[restSelectedIndex] * 60, iterationCount: iterationCountList[iterationSelectedIndex]))
-            TimerView(currentTimer: currentTimer)
+        .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    isShowingAlert.toggle()
+                } label: {
+                    Image(systemName: "arrow.left")
+                }
+            }
+        })
+        .alert("뒤로 가기", isPresented: $isShowingAlert) {
+            Button("취소", role: .none) {}
+            Button("확인", role: .destructive) {
+                dismiss()
+            }
+        } message: {
+            Text("뒤로가기 시 설정 값은 저장되지 않습니다.")
         }
     }
 }
@@ -75,4 +94,5 @@ struct TimerSettingView: View {
     NavigationStack {
         TimerSettingView()
     }
+    .environmentObject(TimerStore())
 }

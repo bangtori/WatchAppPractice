@@ -8,33 +8,68 @@
 import SwiftUI
 
 struct TimerView: View {
-    @State var currentTimer: CurretTimer
+    @EnvironmentObject private var timerStore: TimerStore
+    @State private var isShowingSetting: Bool = false
+    var progressColor: Color {
+        return timerStore.currentTimer.timerType == .focus ? .wfAlphaPurple : .wfAlphaBlue
+    }
+    
     var body: some View {
         Form {
-                WfTimerProgressView(currentTimer: $currentTimer, size: .small)
+            WfTimerProgressView(currentTimer: $timerStore.currentTimer, size: .small)
                 .padding(10)
                 .listRowBackground(Color.clear)
-            Text("\(currentTimer.timerSetting.focusTime/60)m/\(currentTimer.timerSetting.restTime/60)m - \(currentTimer.timerSetting.iterationCount)회")
+            Text("\(timerStore.currentTimer.timerSetting.focusTime/60)m/\(timerStore.currentTimer.timerSetting.restTime/60)m - \(timerStore.currentTimer.timerSetting.iterationCount)회")
                 .frame(maxWidth: .infinity)
                 .listRowBackground(Color.clear)
                 .foregroundStyle(Color.wfGray)
+            VStack {
                 Button {
-                    print(currentTimer)
+                    if timerStore.isRunning {
+                        timerStore.stopTimer()
+                    } else {
+                        timerStore.startTimer()
+                    }
                 } label: {
-                    Text("Start")
+                    Text(timerStore.isRunning ? "STOP" : "START")
                         .bold()
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(.wfMainPurple)
-                .listRowBackground(Color.clear)
+                Button{
+                    timerStore.resetTimer()
+                }label: {
+                    Text("Reset")
+                        .bold()
+                }
+                .tint(.wfAlphaPurple)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(progressColor)
+            .listRowBackground(Color.clear)
 
         }
         .navigationTitle("Timer")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button{
+                    isShowingSetting.toggle()
+                }label: {
+                    Image(systemName: "gearshape.fill")
+                        .foregroundStyle(Color.wfGray)
+                }
+            }
+        }
+        .navigationDestination(isPresented: $isShowingSetting) {
+            TimerSettingView()
+        }
+        .onAppear {
+            timerStore.loadTimerSetting()
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        TimerView(currentTimer: CurretTimer())
+        TimerView()
     }
+    .environmentObject(TimerStore())
 }

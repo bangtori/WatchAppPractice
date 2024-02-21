@@ -23,6 +23,7 @@
 		5391C8012B84D59100983B37 /* WfTimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8002B84D59100983B37 /* WfTimerProgressView.swift */; };
 		5391C8022B84D59100983B37 /* WfTimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8002B84D59100983B37 /* WfTimerProgressView.swift */; };
 		5391C8052B84EFCD00983B37 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8032B84EFCD00983B37 /* TimerView.swift */; };
+		539918942B85CB020019793B /* TimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539918932B85CB020019793B /* TimerStore.swift */; };
 		53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */; };
 		53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD522B7B354D009EB5D5 /* ContentView.swift */; };
 		53ADBD552B7B354E009EB5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53ADBD542B7B354E009EB5D5 /* Assets.xcassets */; };
@@ -117,6 +118,7 @@
 		5391C7FD2B84995000983B37 /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
 		5391C8002B84D59100983B37 /* WfTimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfTimerProgressView.swift; sourceTree = "<group>"; };
 		5391C8032B84EFCD00983B37 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		539918932B85CB020019793B /* TimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStore.swift; sourceTree = "<group>"; };
 		53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFocusApp.swift; sourceTree = "<group>"; };
 		53ADBD522B7B354D009EB5D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -213,9 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				5391C7F12B848D1D00983B37 /* TodoView.swift */,
-				5391C7F32B848D2500983B37 /* TimerSettingView.swift */,
 				5391C7FD2B84995000983B37 /* TodoRowView.swift */,
 				5391C8032B84EFCD00983B37 /* TimerView.swift */,
+				5391C7F32B848D2500983B37 /* TimerSettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				5391C7F62B848D6400983B37 /* TodoStore.swift */,
+				539918932B85CB020019793B /* TimerStore.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				5329BEFF2B84790E004AFEAD /* Double+Extension.swift in Sources */,
 				5391C7F42B848D2500983B37 /* TimerSettingView.swift in Sources */,
 				5391C7FC2B848E0900983B37 /* Int+Extension.swift in Sources */,
+				539918942B85CB020019793B /* TimerStore.swift in Sources */,
 				5391C7FF2B84995000983B37 /* TodoRowView.swift in Sources */,
 				5329BF002B847912004AFEAD /* Font+Extension.swift in Sources */,
 				53ADBD792B7B354E009EB5D5 /* WatchFocusApp.swift in Sources */,

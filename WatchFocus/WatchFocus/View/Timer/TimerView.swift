@@ -92,7 +92,7 @@ struct TimerView: View {
             Button("확인", role: .none) {
                 timerStore.resetTimer()
             }
-        }message: {
+        } message: {
             Text("뽀모도로 집중 시간이 끝났습니다.")
         }
         .navigationDestination(isPresented: $isShowingSetting) {
