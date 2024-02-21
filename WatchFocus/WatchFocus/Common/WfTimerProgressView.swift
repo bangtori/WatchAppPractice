@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct WfTimerProgressView: View {
+    enum Size {
+        case large
+        case small
+    }
     @Binding var currentTimer: CurretTimer
-    
+    var size: Size = .large
     var progress: Double {
         let totalTime: Int
         switch currentTimer.timerType {
@@ -37,7 +41,7 @@ struct WfTimerProgressView: View {
                     .font(.wfBody1Font)
                     .foregroundStyle(progressColor)
                 Text(currentTimer.remainTime.timeFormatting())
-                    .font(.wfLargeTitleFont)
+                    .font(size == .large ? .wfLargeTitleFont : .wfBody1Font)
             }
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
