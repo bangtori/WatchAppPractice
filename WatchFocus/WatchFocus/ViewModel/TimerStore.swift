@@ -26,6 +26,7 @@ class TimerStore: ObservableObject {
     private var timer: Timer?
     
     func updateSetting(setting: TimerSetting) {
+        stopTimer()
         let newTimer = CurretTimer(timer: setting, currentIterationCount: 0, timerType: .rest, remainTime: 0)
         currentTimer = newTimer
         
@@ -37,7 +38,7 @@ class TimerStore: ObservableObject {
         } else {
             toggleTimerType()
         }
-        sendLocalNotification(currentType: currentTimer.timerType)
+        sendLocalNotification(newTimerType: currentTimer.timerType)
     }
     
     func startTimer(){
@@ -54,7 +55,10 @@ class TimerStore: ObservableObject {
     func progressTimer(){
         if currentTimer.remainTime > 0{
             currentTimer.remainTime -= 1
-            totalFocusTime += 1
+            if currentTimer.timerType == .focus {
+                totalFocusTime += 1
+                saveTotalFocusUserDefaults()
+            }
         }else{
             finishSession()
         }
@@ -107,14 +111,14 @@ class TimerStore: ObservableObject {
         UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: UserDefaultsKeys.lastDateSaveTime.rawValue)
     }
     
-    private func sendLocalNotification(currentType: TimerType) {
+    private func sendLocalNotification(newTimerType: TimerType) {
         let content = UNMutableNotificationContent()
         content.title = "Session 완료"
-        switch currentType {
+        switch newTimerType {
         case .focus:
-            content.body = "집중 시간이 끝났습니다. 약간의 휴식 후 다시 시작해요."
-        case .rest:
             content.body = "휴식 시간이 끝났습니다. 다시 집중합시다."
+        case .rest:
+            content.body = "집중 시간이 끝났습니다. 약간의 휴식 후 다시 시작해요."
         }
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
