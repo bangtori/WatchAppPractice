@@ -16,7 +16,7 @@ class TimerStore: ObservableObject {
     @Published var isFinish: Bool = false {
         willSet {
             if newValue == true {
-                saveTotalFocusUserDefaults()
+                stopTimer()
             }
         }
     }
@@ -37,6 +37,7 @@ class TimerStore: ObservableObject {
         } else {
             toggleTimerType()
         }
+        sendLocalNotification(currentType: currentTimer.timerType)
     }
     
     func startTimer(){
@@ -104,5 +105,29 @@ class TimerStore: ObservableObject {
         TotalFocusTimeService.shared.checkRestFocusTime()
         UserDefaults.standard.setValue(totalFocusTime, forKey: UserDefaultsKeys.totalFocusTime.rawValue)
         UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: UserDefaultsKeys.lastDateSaveTime.rawValue)
+    }
+    
+    private func sendLocalNotification(currentType: TimerType) {
+        let content = UNMutableNotificationContent()
+        content.title = "Session 완료"
+        switch currentType {
+        case .focus:
+            content.body = "집중 시간이 끝났습니다. 약간의 휴식 후 다시 시작해요."
+        case .rest:
+            content.body = "휴식 시간이 끝났습니다. 다시 집중합시다."
+        }
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("로컬 알림 스케줄링 오류:", error)
+            } else {
+                print("로컬 알림이 성공적으로 스케줄링되었습니다.")
+            }
+        }
+        
     }
 }

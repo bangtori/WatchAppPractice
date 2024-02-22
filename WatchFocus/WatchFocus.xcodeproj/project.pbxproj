@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		532402C92B8711150035A8FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532402C82B8711150035A8FD /* AppDelegate.swift */; };
 		5329BEFB2B8478FC004AFEAD /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDB82B7B39EA009EB5D5 /* ToDo.swift */; };
 		5329BEFC2B8478FF004AFEAD /* TimerSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */; };
 		5329BEFD2B847902004AFEAD /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */; };
@@ -110,6 +111,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		532402C82B8711150035A8FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		536BBFE72B82EA97005C5AEB /* TotalFocusTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalFocusTimeService.swift; sourceTree = "<group>"; };
 		5391C7F12B848D1D00983B37 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		5391C7F32B848D2500983B37 /* TimerSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingView.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			children = (
 				53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */,
 				53ADBD522B7B354D009EB5D5 /* ContentView.swift */,
+				532402C82B8711150035A8FD /* AppDelegate.swift */,
 				53ADBD542B7B354E009EB5D5 /* Assets.xcassets */,
 				53ADBDB52B7B3778009EB5D5 /* Extensions */,
 				53ADBDC52B7B56FE009EB5D5 /* Common */,
@@ -649,6 +652,7 @@
 				53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */,
 				53ADBDD42B7C5470009EB5D5 /* TimerSetting.swift in Sources */,
 				5391C8012B84D59100983B37 /* WfTimerProgressView.swift in Sources */,
+				532402C92B8711150035A8FD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
