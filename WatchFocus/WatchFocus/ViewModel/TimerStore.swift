@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityKit
 
 class TimerStore: ObservableObject {
     @Published var currentTimer: CurretTimer = CurretTimer() {
@@ -24,6 +25,11 @@ class TimerStore: ObservableObject {
     @Published var totalFocusTime: Int = UserDefaults.standard.integer(forKey: UserDefaultsKeys.totalFocusTime.rawValue)
     
     private var timer: Timer?
+    private var activity: Activity<WatchFocusWidgetAttributes>?
+   
+    var totalTime: Int {
+        return  currentTimer.timerType == .focus ? currentTimer.timerSetting.focusTime : currentTimer.timerSetting.restTime
+    }
     
     func updateSetting(setting: TimerSetting) {
         stopTimer()
@@ -33,6 +39,7 @@ class TimerStore: ObservableObject {
     }
     
     func finishSession() {
+        stopLiveActivity()
         if currentTimer.timerType == .rest && currentTimer.currentIterationCount == currentTimer.timerSetting.iterationCount {
             isFinish = true
         } else {
@@ -45,6 +52,7 @@ class TimerStore: ObservableObject {
         if currentTimer.remainTime == 0 {
             toggleTimerType()
         }
+        
         isRunning = true
         isFinish = false
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
@@ -55,6 +63,16 @@ class TimerStore: ObservableObject {
     func progressTimer(){
         if currentTimer.remainTime > 0{
             currentTimer.remainTime -= 1
+            if activity == nil {
+                startLiveActivity()
+            }
+            let newState = WatchFocusWidgetAttributes.ContentState(progress: Double(currentTimer.remainTime) / Double(totalTime), remainTime: currentTimer.remainTime)
+            let newContent = ActivityContent(state: newState, staleDate: nil, relevanceScore: 1.0)
+            Task { [weak self] in
+                guard let self = self else { return }
+                await activity?.update(newContent)
+            }
+            
             if currentTimer.timerType == .focus {
                 totalFocusTime += 1
                 saveTotalFocusUserDefaults()
@@ -71,6 +89,7 @@ class TimerStore: ObservableObject {
     }
     
     func resetTimer(){
+        stopLiveActivity()
         currentTimer.remainTime = 0
         currentTimer.currentIterationCount = 0
         currentTimer.timerType = .rest
@@ -93,6 +112,30 @@ class TimerStore: ObservableObject {
         }
     }
     
+    private func startLiveActivity() {
+        if !ActivityAuthorizationInfo().areActivitiesEnabled {
+            return
+        }
+        let attributes = WatchFocusWidgetAttributes(totalTime: totalTime, timerType: currentTimer.timerType, iterationCount: currentTimer.currentIterationCount)
+        let state = WatchFocusWidgetAttributes.ContentState(progress: Double(currentTimer.remainTime) / Double(totalTime), remainTime: currentTimer.remainTime)
+        let content = ActivityContent(state: state, staleDate: nil, relevanceScore: 1.0)
+        
+        do {
+            activity = try Activity<WatchFocusWidgetAttributes>.request(attributes: attributes, content: content)
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func stopLiveActivity() {
+        let newState = WatchFocusWidgetAttributes.ContentState(progress: Double(currentTimer.remainTime) / Double(totalTime), remainTime: currentTimer.remainTime)
+        let newContent = ActivityContent(state: newState, staleDate: nil, relevanceScore: 1.0)
+        Task { [weak self] in
+            guard let self = self else { return }
+            await activity?.end(newContent, dismissalPolicy: .immediate)
+        }
+    }
+    
     private func toggleTimerType() {
         switch currentTimer.timerType {
         case .focus:
@@ -103,6 +146,8 @@ class TimerStore: ObservableObject {
             currentTimer.remainTime = currentTimer.timerSetting.focusTime
             currentTimer.currentIterationCount += 1
         }
+        
+        startLiveActivity()
     }
     
     private func saveTotalFocusUserDefaults() {

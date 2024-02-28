@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WfProgressBar: View {
     var progress: Double
+    var progressColor: Color = .wfMainBlue
     
     var body: some View {
         GeometryReader { geometry in
@@ -19,7 +20,7 @@ struct WfProgressBar: View {
                         .foregroundStyle(Color.wfLightGray)
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: min(CGFloat(self.progress) * geometry.size.width, geometry.size.width), height: 10)
-                        .foregroundStyle(Color.wfMainBlue)
+                        .foregroundStyle(progressColor)
                 }
                 Text("\(progress.toPercent())%")
                     .font(.wfCalloutFont)
