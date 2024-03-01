@@ -78,12 +78,11 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         let decoder:JSONDecoder = JSONDecoder()
-        if let data = messageData as? Data{
-            if let saveData = try? decoder.decode([Todo].self, from: data){
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    todos = saveData
-                }
+        
+        if let saveData = try? decoder.decode([Todo].self, from: messageData){
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                todos = saveData
             }
         }
     }
