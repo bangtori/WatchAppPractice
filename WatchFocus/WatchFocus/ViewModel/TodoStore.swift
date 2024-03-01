@@ -52,12 +52,12 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     func deleteTodo(todoId: String) {
         guard let index = todos.firstIndex(where: {$0.id == todoId }) else { return }
         todos.remove(at: index)
-        let encoder:JSONEncoder = JSONEncoder()
-        if let encoded = try? encoder.encode(todos){
-            session.sendMessageData(encoded, replyHandler: nil) { error in
-                print("ios -> Watch send Error: \(error.localizedDescription)")
-            }
-        }
+        sendToWatch()
+    }
+    
+    func deleteAllTodo() {
+        todos = []
+        sendToWatch()
     }
     
     private func saveTodo(){
