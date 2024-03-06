@@ -7,11 +7,13 @@
 
 import Foundation
 import WatchConnectivity
+import WidgetKit
 
 class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     @Published var todos: [Todo] = [] {
         didSet {
             saveTodo()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     var session: WCSession
@@ -36,7 +38,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     
     func loadTodo() {
         let decoder:JSONDecoder = JSONDecoder()
-        if let data = UserDefaults.standard.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
+        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
             if let saveData = try? decoder.decode([Todo].self, from: data){
                 todos = saveData
             }
@@ -63,7 +65,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     private func saveTodo(){
         let encoder:JSONEncoder = JSONEncoder()
         if let encoded = try? encoder.encode(todos){
-            UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.todo.rawValue)
+            UserDefaults.groupShared.set(encoded, forKey: UserDefaultsKeys.todo.rawValue)
         }
     }
     

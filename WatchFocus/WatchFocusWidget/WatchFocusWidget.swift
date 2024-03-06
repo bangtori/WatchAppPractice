@@ -10,75 +10,93 @@ import SwiftUI
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+        SimpleEntry(date: Date(), todos: [])
     }
-
+    
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+        SimpleEntry(date: Date(), todos: [Todo(title: "Todo1", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false)])
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+        var todos: [Todo] = []
+        let decoder:JSONDecoder = JSONDecoder()
+        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
+            if let saveData = try? decoder.decode([Todo].self, from: data){
+                todos = saveData.filter { $0.isChecked == false }
+            }
+        }
         var entries: [SimpleEntry] = []
-
+        
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = SimpleEntry(date: entryDate, todos: todos)
             entries.append(entry)
         }
-
+        
         return Timeline(entries: entries, policy: .atEnd)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationAppIntent
+    var todos: [Todo]
+    //    let configuration: ConfigurationAppIntent
 }
 
 struct WatchFocusWidgetEntryView : View {
     var entry: Provider.Entry
-
+    
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+        VStack(alignment: entry.todos.isEmpty ? .center : .leading) {
+            Text("Todos")
+                .font(Font.system(size: 30, weight: .heavy))
+                .padding(.bottom, 5)
+            if entry.todos.isEmpty {
+                Text("Complete all Todos")
+            } else {
+                VStack {
+                    ForEach(entry.todos) { todo in
+                        HStack{
+                            Button(intent: CheckTodoIntent(todoId: todo.id)) {
+                                todo.isChecked ? Image(systemName: "checkmark.circle.fill") :
+                                Image(systemName: "circle")
+                            }
+                            .buttonStyle(.plain)
+                            .font(Font.system(size: 20))
+                            .foregroundStyle(Color.wfMainPurple)
+                            .padding(.trailing, 5)
+                            
+                            VStack(alignment: .leading) {
+                                Text(todo.title)
+                                    .font(.wfBody1Font)
+                                    .foregroundStyle(Color.black)
+                                if let deadline = todo.deadline {
+                                    Text(deadline.toStringDeadLine())
+                                        .font(.wfCalloutFont)
+                                        .foregroundStyle(Color.wfGray)
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+            }
+            Spacer()
         }
     }
 }
 
 struct WatchFocusWidget: Widget {
     let kind: String = "WatchFocusWidget"
-
+    
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             WatchFocusWidgetEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
+                .containerBackground(Color.wfBackgroundGray.tertiary, for: .widget)
         }
+        .configurationDisplayName("Select ToDo Style")
+        .description(Text("Todo 목록 스타일을 선택하여 위젯을 나타낼 수 있습니다."))
     }
-}
-
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
-    }
-}
-
-#Preview(as: .systemSmall) {
-    WatchFocusWidget()
-} timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
 }

@@ -71,6 +71,10 @@
 		53DFCD852B8E91B300D9C2FE /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC02B7B42DD009EB5D5 /* Font+Extension.swift */; };
 		53DFCD862B8E91B700D9C2FE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C7FA2B848E0900983B37 /* Int+Extension.swift */; };
 		53DFCD872B8E977A00D9C2FE /* TimerSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */; };
+		53DFF23F2B973FA10092A2D4 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFF23E2B973FA10092A2D4 /* UserDefaults+Extension.swift */; };
+		53DFF2402B97405D0092A2D4 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFF23E2B973FA10092A2D4 /* UserDefaults+Extension.swift */; };
+		53DFF2422B974CEB0092A2D4 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDB82B7B39EA009EB5D5 /* ToDo.swift */; };
+		53DFF2432B97538C0092A2D4 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +203,9 @@
 		53DFCD752B8E8F8100D9C2FE /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		53DFCD772B8E8F8300D9C2FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53DFCD792B8E8F8300D9C2FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53DFF23C2B973EFB0092A2D4 /* WatchFocus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchFocus.entitlements; sourceTree = "<group>"; };
+		53DFF23D2B973F650092A2D4 /* WatchFocusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchFocusWidgetExtension.entitlements; sourceTree = "<group>"; };
+		53DFF23E2B973FA10092A2D4 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +294,7 @@
 		53ADBD442B7B354C009EB5D5 = {
 			isa = PBXGroup;
 			children = (
+				53DFF23D2B973F650092A2D4 /* WatchFocusWidgetExtension.entitlements */,
 				53ADBD4F2B7B354D009EB5D5 /* WatchFocus */,
 				53ADBD602B7B354E009EB5D5 /* WatchFocusTests */,
 				53ADBD6A2B7B354E009EB5D5 /* WatchFocusUITests */,
@@ -316,6 +324,7 @@
 		53ADBD4F2B7B354D009EB5D5 /* WatchFocus */ = {
 			isa = PBXGroup;
 			children = (
+				53DFF23C2B973EFB0092A2D4 /* WatchFocus.entitlements */,
 				53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */,
 				53ADBD522B7B354D009EB5D5 /* ContentView.swift */,
 				532402C82B8711150035A8FD /* AppDelegate.swift */,
@@ -411,6 +420,7 @@
 				53ADBDBB2B7B3BBA009EB5D5 /* Double+Extension.swift */,
 				53ADBDC02B7B42DD009EB5D5 /* Font+Extension.swift */,
 				5391C7FA2B848E0900983B37 /* Int+Extension.swift */,
+				53DFF23E2B973FA10092A2D4 /* UserDefaults+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -760,6 +770,7 @@
 				53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */,
 				53ADBDD42B7C5470009EB5D5 /* TimerSetting.swift in Sources */,
 				5391C8012B84D59100983B37 /* WfTimerProgressView.swift in Sources */,
+				53DFF23F2B973FA10092A2D4 /* UserDefaults+Extension.swift in Sources */,
 				532402C92B8711150035A8FD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -827,7 +838,10 @@
 			files = (
 				53DFCD872B8E977A00D9C2FE /* TimerSetting.swift in Sources */,
 				53DFCD702B8E8F8100D9C2FE /* WatchFocusWidgetBundle.swift in Sources */,
+				53DFF2432B97538C0092A2D4 /* UserDefaultsKeys.swift in Sources */,
 				53DFCD832B8E91AD00D9C2FE /* Color+Extension.swift in Sources */,
+				53DFF2422B974CEB0092A2D4 /* ToDo.swift in Sources */,
+				53DFF2402B97405D0092A2D4 /* UserDefaults+Extension.swift in Sources */,
 				53DFCD842B8E91B000D9C2FE /* Double+Extension.swift in Sources */,
 				53DFCD862B8E91B700D9C2FE /* Int+Extension.swift in Sources */,
 				53DFCD762B8E8F8100D9C2FE /* AppIntent.swift in Sources */,
@@ -1055,6 +1069,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WatchFocus/WatchFocus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchFocus/Preview Content\"";
@@ -1089,6 +1104,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WatchFocus/WatchFocus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchFocus/Preview Content\"";
@@ -1291,6 +1307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WatchFocusWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 977J65FA28;
@@ -1320,6 +1337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WatchFocusWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 977J65FA28;
