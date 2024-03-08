@@ -106,7 +106,6 @@ struct TodoWidgetView: View {
                             VStack(alignment: .leading) {
                                 Text(todo.title)
                                     .font(size == .defaultSize ? .wfBody1Font : .wfCalloutFont)
-                                    .foregroundStyle(Color.black)
                                 if let deadline = todo.deadline, size == .defaultSize {
                                     Text(deadline.toStringDeadLine())
                                         .font(.wfCalloutFont)

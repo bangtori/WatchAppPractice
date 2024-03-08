@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import UIKit
 
 @available(iOS 13.0, *)
-public extension Color {
+extension Color {
     /// #FFFFFF와 같이 16진수 hexString color를 쓸 수 있음.
     init(hex: String, opacity: Double = 1.0) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -23,6 +24,19 @@ public extension Color {
         let blue = Double(rgb & 0x0000FF) / 255.0
 
         self.init(red: red, green: green, blue: blue, opacity: opacity)
+    }
+    
+    func downSaturation(percent value: Double = 0.3) -> Color{
+        let uiColor = UIColor(self)
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        uiColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        let newSaturation = max(saturation - value, 0)
+        
+        return Color(hue: hue, saturation: newSaturation, brightness: brightness)
     }
 
     

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WfTimerProgressView: View {
+    @Environment(\.colorScheme) var scheme
     enum Size {
         case large
         case small
@@ -28,7 +29,7 @@ struct WfTimerProgressView: View {
         return Double(currentTimer.remainTime) / Double(totalTime)
     }
     
-    var progressColor: Color {
+    var progressColor: WfColor {
         return currentTimer.timerType == .focus ? .wfMainPurple : .wfMainBlue
     }
     
@@ -39,13 +40,13 @@ struct WfTimerProgressView: View {
             VStack {
                 Text("Session \(currentTimer.currentIterationCount)")
                     .font(.wfBody1Font)
-                    .foregroundStyle(progressColor)
+                    .foregroundStyle(progressColor.returnColor(scheme: scheme))
                 Text(currentTimer.remainTime.timeFormatting())
                     .font(size == .large ? .wfLargeTitleFont : .wfBody1Font)
             }
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(progressColor, style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                .stroke(progressColor.returnColor(scheme: scheme), style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .rotationEffect(Angle(degrees: -90))
         }
     }

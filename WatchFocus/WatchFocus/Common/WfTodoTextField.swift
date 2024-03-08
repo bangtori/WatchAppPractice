@@ -8,18 +8,23 @@
 import SwiftUI
 
 struct WfTodoTextField: View {
+    @Environment(\.colorScheme) var scheme
     var placeholder: String
     @Binding var text: String
     @FocusState private var isFocused: Bool
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .stroke(isFocused ? Color.wfMainBlue : Color.clear, lineWidth: 1)
-                .background(RoundedRectangle(cornerRadius: 20).foregroundStyle(Color.wfBackgroundGray))
+                .stroke(isFocused ? WfColor.wfMainBlue.returnColor(scheme: scheme) : Color.clear, lineWidth: 1)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
+                )
             TextField(placeholder, text: $text)
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                 .font(.wfBody2Font)
-                .foregroundStyle(Color.wfBlueGray)
+                .fontWeight(.heavy)
+                .foregroundStyle(WfColor.wfBlueGray.returnColor(scheme: scheme))
                 .focused($isFocused)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
@@ -31,7 +36,7 @@ struct WfTodoTextField: View {
                         text = ""
                     }, label: {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.wfAlphaBlue)
+                            .foregroundColor(WfColor.wfAlphaBlue.returnColor(scheme: scheme))
                     })
                     .padding(.trailing, 20)
                 }

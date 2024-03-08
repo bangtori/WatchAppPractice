@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TodoView: View {
+    @Environment(\.colorScheme) var scheme
     @EnvironmentObject private var todoStore: TodoStore
     @State private var isShowingAddView: Bool = false
     @State private var isShowingAlert: Bool = false
@@ -17,10 +18,9 @@ struct TodoView: View {
             List{
                 Section("Achieve") {
                     WfProgressBar(progress: todoStore.progress)
-                    
                 }
                 .listRowSeparator(.hidden)
-                .listRowBackground(Color.wfBackgroundGray)
+                .listRowBackground(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
                 Section {
                     ForEach(todoStore.todos) { todo in
                         TodoRowView(todo: todo)
@@ -29,8 +29,9 @@ struct TodoView: View {
                             .listSectionSeparator(.hidden, edges: .all)
                             .listRowBackground(
                                 RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color(hex: "#6A6A6A"),style: StrokeStyle(lineWidth: scheme == .light ? 0 : 2))
+                                    .fill(WfColor.wfRowBackgroundColor.returnColor(scheme: scheme))
                                     .background(.clear)
-                                    .foregroundColor(.white)
                                     .padding(
                                         EdgeInsets(
                                             top: 10,
@@ -39,7 +40,7 @@ struct TodoView: View {
                                             trailing: 10
                                         )
                                     )
-                                    .shadow(color: Color(hex: "F0F3FF"), radius: 5, x: 5, y: 4)
+                                    .shadow(color: scheme == .light ? Color(hex: "F0F3FF") : Color(hex: "F0F3FF", opacity: 0), radius: 5, x: 5, y: 4)
                             )
                     }
                 } header: {
@@ -50,7 +51,7 @@ struct TodoView: View {
                             isShowingAlert.toggle()
                         } label: {
                             Text("All Remove")
-                                .foregroundStyle(Color.wfAlphaBlue)
+                                .foregroundStyle(WfColor.wfAlphaBlue.returnColor(scheme: scheme))
                         }
                     }
                 }
@@ -59,8 +60,8 @@ struct TodoView: View {
                 isShowingAddView.toggle()
             } label: {
                 Image(systemName: "plus.circle.fill")
-                    .foregroundColor(.wfMainPurple)
-                    .background(.white)
+                    .foregroundStyle(WfColor.wfMainPurple.returnColor(scheme: scheme))
+                    .background(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
                     .font(Font.system(size: 50))
                     .clipShape(Circle())
                     .padding()
@@ -69,7 +70,7 @@ struct TodoView: View {
         .listStyle(.plain)
         .navigationTitle("Todos")
         .scrollContentBackground(.hidden)
-        .background(Color.wfBackgroundGray, ignoresSafeAreaEdges: .all)
+        .background(WfColor.wfbackgroundColor.returnColor(scheme: scheme), ignoresSafeAreaEdges: .all)
         .sheet(isPresented: $isShowingAddView) {
             TodoAddView()
                 .presentationDetents([.medium])

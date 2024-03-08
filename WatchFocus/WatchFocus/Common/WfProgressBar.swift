@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct WfProgressBar: View {
+    @Environment(\.colorScheme) var scheme
     var progress: Double
-    var progressColor: Color = .wfMainBlue
+    var progressColor: WfColor = .wfMainBlue
     
     var body: some View {
         GeometryReader { geometry in
@@ -17,14 +18,14 @@ struct WfProgressBar: View {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: geometry.size.width, height: 10)
-                        .foregroundStyle(Color.wfLightGray)
+                        .foregroundStyle(WfColor.wfLightGray.returnColor(scheme: scheme))
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: min(CGFloat(self.progress) * geometry.size.width, geometry.size.width), height: 10)
-                        .foregroundStyle(progressColor)
+                        .foregroundStyle(progressColor.returnColor(scheme: scheme))
                 }
                 Text("\(progress.toPercent())%")
                     .font(.wfCalloutFont)
-                    .foregroundStyle(Color.wfLightGray)
+                    .foregroundStyle(WfColor.wfLightGray.returnColor(scheme: scheme))
                     .offset(x: progress == 0 ? 0 : min(CGFloat(self.progress) * geometry.size.width, geometry.size.width) - 15, y: 0)
             }
         }

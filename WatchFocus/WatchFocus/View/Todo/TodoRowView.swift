@@ -32,7 +32,6 @@ struct TodoRowView: View {
                 } else {
                     Text(todo.title)
                         .font(.wfTitleFont)
-                        .foregroundStyle(Color.black)
                 }
                 if let deadline = todo.deadline {
                     Text(deadline.toStringDeadLine())

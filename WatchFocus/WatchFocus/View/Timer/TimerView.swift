@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct TimerView: View {
+    @Environment(\.colorScheme) var scheme
     @EnvironmentObject private var timerStore: TimerStore
     @State private var isShowingSetting: Bool = false
     
-    var progressColor: Color {
+    var progressColor: WfColor {
         return timerStore.currentTimer.timerType == .focus ? .wfMainPurple : .wfMainBlue
     }
     var body: some View {
@@ -24,8 +25,9 @@ struct TimerView: View {
                     .listRowSeparator(.hidden)
                     .listRowBackground(
                         RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color(hex: "#6A6A6A"),style: StrokeStyle(lineWidth: scheme == .light ? 0 : 2))
+                            .fill(WfColor.wfRowBackgroundColor.returnColor(scheme: scheme))
                             .background(.clear)
-                            .foregroundColor(.white)
                             .padding(
                                 EdgeInsets(
                                     top: 10,
@@ -34,14 +36,14 @@ struct TimerView: View {
                                     trailing: 10
                                 )
                             )
-                            .shadow(color: Color(hex: "F0F3FF"), radius: 5, x: 5, y: 4)
+                            .shadow(color: scheme == .light ? Color(hex: "F0F3FF") : Color(hex: "F0F3FF", opacity: 0), radius: 5, x: 5, y: 4)
                     )
             }
             Section {
                 VStack {
                     Text("Pomodoro \(timerStore.currentTimer.timerSetting.focusTime/60)m/\(timerStore.currentTimer.timerSetting.restTime/60)m")
                         .font(.wfTitleFont)
-                        .foregroundStyle(Color.wfGray)
+                        .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
                     WfTimerProgressView(currentTimer: $timerStore.currentTimer)
                         .padding()
                         .padding(.bottom)
@@ -56,18 +58,18 @@ struct TimerView: View {
                             .frame(width: 150, height: 50)
                             .font(.wfTitleFont)
                             .foregroundStyle(Color.white)
-                            .background(progressColor)
+                            .background(progressColor.returnColor(scheme: scheme))
                             .clipShape(RoundedRectangle(cornerRadius: 40))
 
                     }
                     
                 }
             }
-            .listRowBackground(Color.wfBackgroundGray)
+            .listRowBackground(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
             .listRowSeparator(.hidden)
         }
         .scrollContentBackground(.hidden)
-        .background(Color.wfBackgroundGray, ignoresSafeAreaEdges: .all)
+        .background(WfColor.wfbackgroundColor.returnColor(scheme: scheme), ignoresSafeAreaEdges: .all)
         .navigationTitle("Timer")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -75,7 +77,7 @@ struct TimerView: View {
                     isShowingSetting.toggle()
                 }label: {
                     Image(systemName: "gearshape.fill")
-                        .foregroundStyle(Color.wfGray)
+                        .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
                 }
             }
             
@@ -84,7 +86,7 @@ struct TimerView: View {
                     timerStore.resetTimer()
                 }label: {
                     Text("Reset")
-                        .foregroundStyle(Color.wfGray)
+                        .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
                 }
             }
         }
