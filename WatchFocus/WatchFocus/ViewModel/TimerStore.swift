@@ -51,8 +51,9 @@ class TimerStore: ObservableObject {
     func startTimer(){
         if currentTimer.remainTime == 0 {
             toggleTimerType()
+        } else {
+            startLiveActivity()
         }
-        
         isRunning = true
         isFinish = false
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
@@ -86,6 +87,7 @@ class TimerStore: ObservableObject {
         timer?.invalidate()
         isRunning = false
         saveTotalFocusUserDefaults()
+        stopLiveActivity()
     }
     
     func resetTimer(){
