@@ -46,44 +46,17 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct WatchFocusWidgetEntryView : View {
+    @Environment(\.widgetFamily) private var family
     var entry: Provider.Entry
     
     var body: some View {
-        VStack(alignment: entry.todos.isEmpty ? .center : .leading) {
-            Text("Todos")
-                .font(Font.system(size: 30, weight: .heavy))
-                .padding(.bottom, 5)
-            if entry.todos.isEmpty {
-                Text("Complete all Todos")
-            } else {
-                VStack {
-                    ForEach(entry.todos) { todo in
-                        HStack{
-                            Button(intent: CheckTodoIntent(todoId: todo.id)) {
-                                todo.isChecked ? Image(systemName: "checkmark.circle.fill") :
-                                Image(systemName: "circle")
-                            }
-                            .buttonStyle(.plain)
-                            .font(Font.system(size: 20))
-                            .foregroundStyle(Color.wfMainPurple)
-                            .padding(.trailing, 5)
-                            
-                            VStack(alignment: .leading) {
-                                Text(todo.title)
-                                    .font(.wfBody1Font)
-                                    .foregroundStyle(Color.black)
-                                if let deadline = todo.deadline {
-                                    Text(deadline.toStringDeadLine())
-                                        .font(.wfCalloutFont)
-                                        .foregroundStyle(Color.wfGray)
-                                }
-                            }
-                            Spacer()
-                        }
-                    }
-                }
-            }
-            Spacer()
+        switch family {
+        case .systemSmall, .systemMedium, .systemLarge:
+            TodoWidgetView(entry: entry, size: .defaultSize)
+        case .accessoryRectangular:
+            TodoWidgetView(entry: entry, size: .smallSize)
+        default:
+            EmptyView()
         }
     }
 }
@@ -98,5 +71,54 @@ struct WatchFocusWidget: Widget {
         }
         .configurationDisplayName("Select ToDo Style")
         .description(Text("Todo 목록 스타일을 선택하여 위젯을 나타낼 수 있습니다."))
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular])
+    }
+}
+
+struct TodoWidgetView: View {
+    enum Size {
+        case smallSize
+        case defaultSize
+    }
+    let entry: Provider.Entry
+    var size: Size
+    
+    var body: some View {
+        VStack(alignment: entry.todos.isEmpty ? .center : .leading) {
+            Text("Todos")
+                .font(size == .defaultSize ? Font.system(size: 30, weight: .heavy) : Font.system(size: 15, weight: .heavy))
+                .padding(.bottom, 5)
+            if entry.todos.isEmpty {
+                Text("Complete all Todos")
+            } else {
+                VStack {
+                    ForEach(entry.todos) { todo in
+                        HStack{
+                            Button(intent: CheckTodoIntent(todoId: todo.id)) {
+                                todo.isChecked ? Image(systemName: "checkmark.circle.fill") :
+                                Image(systemName: "circle")
+                            }
+                            .buttonStyle(.plain)
+                            .font(size == .defaultSize ? Font.system(size: 20) : Font.system(size: 15))
+                            .foregroundStyle(Color.wfMainPurple)
+                            .padding(.trailing, 5)
+                            
+                            VStack(alignment: .leading) {
+                                Text(todo.title)
+                                    .font(size == .defaultSize ? .wfBody1Font : .wfCalloutFont)
+                                    .foregroundStyle(Color.black)
+                                if let deadline = todo.deadline, size == .defaultSize {
+                                    Text(deadline.toStringDeadLine())
+                                        .font(.wfCalloutFont)
+                                        .foregroundStyle(Color.wfGray)
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+            }
+            Spacer()
+        }
     }
 }
