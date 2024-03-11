@@ -12,9 +12,14 @@ import UserNotifications
 struct WatchFocusApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    @StateObject private var todoStore: TodoStore = TodoStore()
+    @StateObject private var timerStore: TimerStore = TimerStore()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(todoStore)
+                .environmentObject(timerStore)
                 .onAppear {
                     TotalFocusTimeService.shared.checkRestFocusTime()
                 }

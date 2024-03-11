@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject private var todoStore: TodoStore = TodoStore()
-    @StateObject private var timerStore: TimerStore = TimerStore()
-    
+struct ContentView: View {    
     var body: some View {
         TabBarView()
-            .environmentObject(todoStore)
-            .environmentObject(timerStore)
     }
 }
 
