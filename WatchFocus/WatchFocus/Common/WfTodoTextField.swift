@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DYColor
 
 struct WfTodoTextField: View {
     @Environment(\.colorScheme) var scheme
@@ -15,16 +16,16 @@ struct WfTodoTextField: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .stroke(isFocused ? WfColor.wfMainBlue.returnColor(scheme: scheme) : Color.clear, lineWidth: 1)
+                .stroke(isFocused ? DYColor.wfMainBlue.dynamicColor : Color.clear, lineWidth: 1)
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
+                        .foregroundStyle(DYColor.wfbackgroundColor.dynamicColor)
                 )
             TextField(placeholder, text: $text)
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                 .font(.wfBody2Font)
                 .fontWeight(.heavy)
-                .foregroundStyle(WfColor.wfBlueGray.returnColor(scheme: scheme))
+                .foregroundStyle(Color.wfBlueGray)
                 .focused($isFocused)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
@@ -36,7 +37,7 @@ struct WfTodoTextField: View {
                         text = ""
                     }, label: {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(WfColor.wfAlphaBlue.returnColor(scheme: scheme))
+                            .foregroundColor(DYColor.wfAlphaBlue.dynamicColor)
                     })
                     .padding(.trailing, 20)
                 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DYColor
 
 struct TimerSettingView: View {
     @Environment(\.colorScheme) var scheme
@@ -26,12 +27,12 @@ struct TimerSettingView: View {
             HStack {
                 Text("10")
                     .font(.wfCalloutFont)
-                    .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                    .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
                 Slider(value: $focusTimeValue, in: 10...120, step: 5)
-                    .tint(WfColor.wfMainPurple.returnColor(scheme: scheme))
+                    .tint(DYColor.wfMainPurple.dynamicColor)
                 Text("120")
                     .font(.wfCalloutFont)
-                    .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                    .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
             }
             .padding(.bottom, 30)
             
@@ -44,12 +45,12 @@ struct TimerSettingView: View {
             HStack {
                 Text("0")
                     .font(.wfCalloutFont)
-                    .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                    .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
                 Slider(value: $restTimeValue, in: 0...30, step: 5)
-                    .tint(WfColor.wfMainBlue.returnColor(scheme: scheme))
+                    .tint(DYColor.wfMainBlue.dynamicColor)
                 Text("30")
                     .font(.wfCalloutFont)
-                    .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                    .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
             }
             .padding(.bottom, 30)
             HStack {
@@ -58,7 +59,7 @@ struct TimerSettingView: View {
                         .font(.wfTitleFont)
                     Text("min: 1 / max: 10")
                         .font(.wfCalloutFont)
-                        .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                        .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
                 }
                 Spacer()
                 Button {
@@ -68,7 +69,7 @@ struct TimerSettingView: View {
                 } label: {
                     Image(systemName: "minus")
                 }
-                .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
                 Text("\(iterationCount)")
                     .frame(width: 50)
                 Button {
@@ -78,7 +79,7 @@ struct TimerSettingView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
-                .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
             }
             .font(.wfBody1Font)
             Spacer()
@@ -91,7 +92,7 @@ struct TimerSettingView: View {
                     .padding(.vertical, 10)
                     .font(.wfBody1Font)
                     .foregroundStyle(Color.white)
-                    .background(WfColor.wfMainBlue.returnColor(scheme: scheme))
+                    .background(DYColor.wfSubTitleText.dynamicColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }
             .alert("타이머 설정", isPresented: $isShowingAlert) {

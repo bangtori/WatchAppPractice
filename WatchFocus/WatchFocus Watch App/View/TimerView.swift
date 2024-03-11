@@ -16,7 +16,7 @@ struct TimerView: View {
     
     var body: some View {
         Form {
-            WfTimerProgressView(currentTimer: $timerStore.currentTimer, size: .small)
+            WfTimerProgressView(currentTimer: $timerStore.currentTimer, size: .small, progressColor: progressColor)
                 .padding(10)
                 .listRowBackground(Color.clear)
             Text("\(timerStore.currentTimer.timerSetting.focusTime/60)m/\(timerStore.currentTimer.timerSetting.restTime/60)m - \(timerStore.currentTimer.timerSetting.iterationCount)회")

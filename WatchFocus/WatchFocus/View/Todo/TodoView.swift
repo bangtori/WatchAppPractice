@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DYColor
 
 struct TodoView: View {
     @Environment(\.colorScheme) var scheme
@@ -17,10 +18,10 @@ struct TodoView: View {
         ZStack(alignment: .bottomTrailing){
             List{
                 Section("Achieve") {
-                    WfProgressBar(progress: todoStore.progress)
+                    WfProgressBar(progress: todoStore.progress, progressColor: DYColor.wfMainBlue)
                 }
                 .listRowSeparator(.hidden)
-                .listRowBackground(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
+                .listRowBackground(DYColor.wfbackgroundColor.dynamicColor)
                 Section {
                     ForEach(todoStore.todos) { todo in
                         TodoRowView(todo: todo)
@@ -29,8 +30,8 @@ struct TodoView: View {
                             .listSectionSeparator(.hidden, edges: .all)
                             .listRowBackground(
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color(hex: "#6A6A6A"),style: StrokeStyle(lineWidth: scheme == .light ? 0 : 2))
-                                    .fill(WfColor.wfRowBackgroundColor.returnColor(scheme: scheme))
+                                    .stroke(Color.wfGray4,style: StrokeStyle(lineWidth: scheme == .light ? 0 : 2))
+                                    .fill(DYColor.wfRowBackgroundColor.dynamicColor)
                                     .background(.clear)
                                     .padding(
                                         EdgeInsets(
@@ -51,7 +52,7 @@ struct TodoView: View {
                             isShowingAlert.toggle()
                         } label: {
                             Text("All Remove")
-                                .foregroundStyle(WfColor.wfAlphaBlue.returnColor(scheme: scheme))
+                                .foregroundStyle(DYColor.wfAlphaBlue.dynamicColor)
                         }
                     }
                 }
@@ -60,8 +61,8 @@ struct TodoView: View {
                 isShowingAddView.toggle()
             } label: {
                 Image(systemName: "plus.circle.fill")
-                    .foregroundStyle(WfColor.wfMainPurple.returnColor(scheme: scheme))
-                    .background(WfColor.wfbackgroundColor.returnColor(scheme: scheme))
+                    .foregroundStyle(DYColor.wfMainPurple.dynamicColor)
+                    .background(DYColor.wfbackgroundColor.dynamicColor)
                     .font(Font.system(size: 50))
                     .clipShape(Circle())
                     .padding()
@@ -70,7 +71,7 @@ struct TodoView: View {
         .listStyle(.plain)
         .navigationTitle("Todos")
         .scrollContentBackground(.hidden)
-        .background(WfColor.wfbackgroundColor.returnColor(scheme: scheme), ignoresSafeAreaEdges: .all)
+        .background(DYColor.wfbackgroundColor.dynamicColor, ignoresSafeAreaEdges: .all)
         .sheet(isPresented: $isShowingAddView) {
             TodoAddView()
                 .presentationDetents([.medium])

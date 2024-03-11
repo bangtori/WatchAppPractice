@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "dycolor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bangtori/DYColor.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4da3c3d3673ad4868b9ac703979a5aadec2469a0"
+      }
+    }
+  ],
+  "version" : 2
+}
