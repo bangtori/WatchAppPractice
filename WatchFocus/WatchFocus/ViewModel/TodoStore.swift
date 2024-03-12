@@ -37,6 +37,13 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         session.activate()
     }
     
+    func getCategoryProgress(_ categoryId: String) -> Double {
+        let categoryTodos = todos.filter{ $0.category?.id == categoryId }
+        if categoryTodos.count == 0 { return 0.0 }
+        let checkCount = categoryTodos.filter{ $0.isChecked }.count
+        return Double(checkCount) / Double(categoryTodos.count)
+    }
+    
     func checkTodo(todoId: String) {
         guard let index = todos.firstIndex(where: {$0.id == todoId }) else { return }
         todos[index].checkTodo()

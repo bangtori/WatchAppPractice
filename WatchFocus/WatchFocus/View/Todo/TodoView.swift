@@ -13,7 +13,7 @@ struct TodoView: View {
     @EnvironmentObject private var todoStore: TodoStore
     @State private var isShowingAddView: Bool = false
     @State private var isShowingAlert: Bool = false
-    
+    @State private var selectedCategory: Category? = nil
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             List{
@@ -23,7 +23,36 @@ struct TodoView: View {
                 .listRowSeparator(.hidden)
                 .listRowBackground(DYColor.wfbackgroundColor.dynamicColor)
                 Section {
-                    ForEach(todoStore.todos) { todo in
+                    ScrollView {
+                        HStack {
+                            Button {
+                                selectedCategory = nil
+                            } label: {
+                                Text("All")
+                                    .foregroundStyle(selectedCategory == nil ? DYColor.wfBlackWhite.dynamicColor : DYColor.wfUnableCategory.dynamicColor)
+                            }
+                            Text("|")
+                            ForEach(todoStore.categorys) { category in
+                                Button {
+                                    selectedCategory = category
+                                } label: {
+                                    Text(category.name)
+                                        .foregroundStyle(selectedCategory?.id == category.id ? category.color.getDYColor.dynamicColor : DYColor.wfUnableCategory.dynamicColor)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.top, 5)
+                    .listRowSeparator(.hidden)
+                    .font(.wfBody1Font)
+                    .bold()
+                    ForEach(todoStore.todos.filter{
+                        if let category = selectedCategory {
+                            return $0.category?.id == category.id
+                        } else {
+                            return true
+                        }
+                    }) { todo in
                         TodoRowView(todo: todo)
                             .padding(.vertical, 10)
                             .listRowSeparator(.hidden)
@@ -77,6 +106,7 @@ struct TodoView: View {
         }
         .onAppear {
             todoStore.loadTodo()
+            todoStore.loadCategory()
         }
         .alert("Todo 전체 삭제", isPresented: $isShowingAlert) {
             Button("취소", role: .none) {}
@@ -84,7 +114,7 @@ struct TodoView: View {
                 todoStore.deleteAllTodo()
             }
         }message: {
-            Text("작성한 할 일을 저장합니다.")
+            Text("작성한 할 일을 삭제합니다.")
         }
     }
 }

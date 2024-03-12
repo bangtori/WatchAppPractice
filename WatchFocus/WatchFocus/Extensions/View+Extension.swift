@@ -32,5 +32,4 @@ struct OnChangeModifier<V: Equatable>: ViewModifier {
                 }
         }
     }
-    
 }
