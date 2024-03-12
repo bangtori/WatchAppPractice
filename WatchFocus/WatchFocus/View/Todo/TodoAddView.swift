@@ -151,10 +151,12 @@ struct TodoAddView: View {
                     case .addCategory:
                         let newCategory = Category(name: categoryText.trimmingCharacters(in: .whitespaces), color: selectedCategoryColor)
                         todoStore.addCategorys(category: newCategory)
+                        categoryText = ""
                     case .deleteCategory:
                         guard let category = removeCategory else { return }
                         todoStore.deleteCategory(categoryId: category.id)
                     case .fullCategory:
+                        categoryText = ""
                         break
                     }
                 }
@@ -173,7 +175,7 @@ struct TodoAddView: View {
 
         }
         .padding(20)
-        .onTapGesture { self.hideKeyboard() } 
+        .onTapGesture { self.hideKeyboard() }
         .onAppear {
             todoStore.loadCategory()
         }
@@ -194,7 +196,7 @@ struct ColorSelectView: View {
         Circle()
             .fill(isSelected ? color.dynamicColor : color.dynamicColor.opacity(0.3))
             .stroke(DYColor(lightColor: .black, darkColor: .white).dynamicColor, lineWidth: isSelected ? 2 : 0)
-            .frame(maxWidth: 40, maxHeight: 40)
+            .frame(minWidth: 30, maxWidth: 40, minHeight: 30, maxHeight: 40)
     }
 }
 

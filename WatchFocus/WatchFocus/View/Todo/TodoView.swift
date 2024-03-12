@@ -20,7 +20,7 @@ struct TodoView: View {
                 Section("Achieve") {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            VStack(alignment: .center) {
+                            VStack(alignment: .leading) {
                                 Text("All")
                                     .font(.wfTitleFont)
                                 WfProgressBar(progress: todoStore.progress, progressColor: DYColor.wfMainBlue)
@@ -67,6 +67,7 @@ struct TodoView: View {
                             }
                         }
                     }
+                    .listRowBackground(DYColor.wfbackgroundColor.dynamicColor)
                     .padding(.top, 5)
                     .listRowSeparator(.hidden)
                     .font(.wfBody1Font)
