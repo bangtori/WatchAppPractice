@@ -18,7 +18,32 @@ struct TodoView: View {
         ZStack(alignment: .bottomTrailing){
             List{
                 Section("Achieve") {
-                    WfProgressBar(progress: todoStore.progress, progressColor: DYColor.wfMainBlue)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            VStack(alignment: .center) {
+                                Text("All")
+                                    .font(.wfTitleFont)
+                                WfProgressBar(progress: todoStore.progress, progressColor: DYColor.wfMainBlue)
+                            }
+                            .padding()
+                            .background(
+                                RowBackgroundView()
+                            )
+                            .frame(width: UIScreen.main.bounds.width * 0.4)
+                            ForEach(todoStore.categorys) { category in
+                                VStack(alignment: .leading) {
+                                    Text(category.name)
+                                        .font(.wfTitleFont)
+                                    WfProgressBar(progress: todoStore.getCategoryProgress(category.id), progressColor: category.color.getDYColor)
+                                }
+                                .padding()
+                                .background(
+                                    RowBackgroundView()
+                                )
+                                .frame(width: UIScreen.main.bounds.width * 0.4)
+                            }
+                        }
+                    }
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(DYColor.wfbackgroundColor.dynamicColor)

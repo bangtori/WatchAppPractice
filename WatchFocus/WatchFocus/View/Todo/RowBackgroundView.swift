@@ -16,14 +16,7 @@ struct RowBackgroundView: View {
             .stroke(Color.wfGray4,style: StrokeStyle(lineWidth: scheme == .light ? 0 : 2))
             .fill(DYColor.wfRowBackgroundColor.dynamicColor)
             .background(.clear)
-            .padding(
-                EdgeInsets(
-                    top: 10,
-                    leading: 10,
-                    bottom: 10,
-                    trailing: 10
-                )
-            )
+            .padding(2)
             .shadow(color: scheme == .light ? Color(hex: "F0F3FF") : Color(hex: "F0F3FF", opacity: 0), radius: 5, x: 5, y: 4)
     }
 }
