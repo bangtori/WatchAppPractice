@@ -112,7 +112,7 @@ struct TodoView: View {
                 isShowingAddView.toggle()
             } label: {
                 Image(systemName: "plus.circle.fill")
-                    .foregroundStyle(DYColor.wfMainPurple.dynamicColor)
+                    .foregroundStyle(DYColor.wfMainBlue.dynamicColor)
                     .background(DYColor.wfbackgroundColor.dynamicColor)
                     .font(Font.system(size: 50))
                     .clipShape(Circle())
