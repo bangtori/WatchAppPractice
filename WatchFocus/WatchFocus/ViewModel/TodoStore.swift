@@ -89,11 +89,28 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         sendToWatch()
     }
     
-    func deleteAllTodo() {
-        todos = []
+    func deleteAllTodo(isCheck: Bool) {
+        if isCheck {
+            todos = todos.filter{ !$0.isChecked }
+        } else {
+            todos = []
+        }
         sendToWatch()
     }
     
+    func deleteCategoryTodo(categoryId: String, isCheck: Bool) {
+        if isCheck {
+            todos = todos.filter {
+                if $0.category?.id == categoryId {
+                    return !$0.isChecked
+                }
+                return true
+            }
+        } else {
+            todos = todos.filter{ $0.category?.id != categoryId }
+        }
+        sendToWatch()
+    }
     private func saveTodo(){
         let encoder:JSONEncoder = JSONEncoder()
         if let encoded = try? encoder.encode(todos){
