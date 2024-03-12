@@ -10,6 +10,7 @@ import DYColor
 
 
 extension DYColor {
+    static let wfBlackWhite = DYColor(lightColor: .black, darkColor: .white)
     static let wfbackgroundColor = DYColor(lightColor: .wfBackgroundGray, darkColor: Color(hex: "#00000A"))
     static let wfRowBackgroundColor = DYColor(lightColor: .white, darkColor: Color(hex: "#333333"))
     static let wfMainPurple = DYColor(lightColor: .wfMainPurple)
