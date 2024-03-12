@@ -13,4 +13,5 @@ enum UserDefaultsKeys: String, Codable {
     case totalFocusTime
     case lastDateSaveTime
     case backgroundTimer
+    case categorys
 }

@@ -16,6 +16,13 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
+    
+    @Published var categorys: [Category] = [] {
+        didSet {
+            saveCategorys()
+        }
+    }
+    
     var session: WCSession
     var progress: Double {
         if todos.count == 0 { return 0.0 }
@@ -36,6 +43,15 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         sendToWatch()
     }
     
+    func loadCategory() {
+        let decoder:JSONDecoder = JSONDecoder()
+        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.categorys.rawValue) as? Data{
+            if let saveData = try? decoder.decode([Category].self, from: data){
+                categorys = saveData
+            }
+        }
+    }
+    
     func loadTodo() {
         let decoder:JSONDecoder = JSONDecoder()
         if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
@@ -46,9 +62,18 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         sendToWatch()
     }
     
+    func addCategorys(category: Category) {
+        categorys.append(category)
+    }
+    
     func addTodo(todo: Todo) {
         todos.append(todo)
         sendToWatch()
+    }
+    
+    func deleteCategory(categoryId: String) {
+        guard let index = categorys.firstIndex(where: {$0.id == categoryId }) else { return }
+        categorys.remove(at: index)
     }
     
     func deleteTodo(todoId: String) {
@@ -66,6 +91,13 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         let encoder:JSONEncoder = JSONEncoder()
         if let encoded = try? encoder.encode(todos){
             UserDefaults.groupShared.set(encoded, forKey: UserDefaultsKeys.todo.rawValue)
+        }
+    }
+    
+    private func saveCategorys() {
+        let encoder:JSONEncoder = JSONEncoder()
+        if let encoded = try? encoder.encode(categorys){
+            UserDefaults.groupShared.set(encoded, forKey: UserDefaultsKeys.categorys.rawValue)
         }
     }
     

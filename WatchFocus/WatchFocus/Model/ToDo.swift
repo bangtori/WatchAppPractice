@@ -13,7 +13,7 @@ struct Todo: Identifiable, Codable {
     let deadline: Double?
     let createDate : Double
     var isChecked: Bool
-//    var category: Category?
+    var category: Category?
     
     mutating func checkTodo(){
         isChecked = !self.isChecked

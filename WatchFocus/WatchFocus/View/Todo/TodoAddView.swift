@@ -9,6 +9,13 @@ import SwiftUI
 import DYColor
 
 struct TodoAddView: View {
+    enum AlertType {
+        case saveTask
+        case addCategory
+        case deleteCategory
+        case fullCategory
+    }
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var scheme
     
@@ -20,7 +27,10 @@ struct TodoAddView: View {
     @State private var isShowingAlert: Bool = false
     @State private var selectedCategoryColor: CategoryColorCode = .blue
     @State private var selectedCategory: Category?
-    private let categorys: [Category] = [Category(name: "category1", color: .blue), Category(name: "category2", color: .red), Category(name: "category3", color: .green)]
+    @State private var removeCategory: Category?
+//    private let categorys: [Category] = [Category(name: "category1", color: .blue), Category(name: "category2", color: .red), Category(name: "category3", color: .green)]
+    @State private var alertType: AlertType = .addCategory
+    
     var body: some View {
         VStack {
             Text("Add To Do")
@@ -49,7 +59,13 @@ struct TodoAddView: View {
                     HStack {
                         WfTodoTextField(placeholder: "Add Category", text: $categoryText)
                         Button {
-                            // TODO: - 카테고리 추가 로직
+                            if todoStore.categorys.count == 5 {
+                                alertType = .fullCategory
+                                isShowingAlert.toggle()
+                            } else {
+                                alertType = .addCategory
+                                isShowingAlert.toggle()
+                            }
                         } label: {
                             Image(systemName: "plus")
                                 .bold()
@@ -58,6 +74,7 @@ struct TodoAddView: View {
                                 .background(DYColor.wfAlphaBlue.dynamicColor)
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
                         }
+                        .disabled(categoryText.trimmingCharacters(in: .whitespaces).isEmpty)
                         
                     }
                     .padding(.bottom)
@@ -84,9 +101,20 @@ struct TodoAddView: View {
                         selectedCategory = nil
                     }
                     .padding(.bottom, 5)
-                    ForEach(categorys) { category in
-                        CategoryRadioButton(isSelected: selectedCategory?.id == category.id ? true : false, label: category.name, color: category.color.getDYColor){
-                            selectedCategory = category
+                    ForEach(todoStore.categorys) { category in
+                        HStack(alignment: .center) {
+                            CategoryRadioButton(isSelected: selectedCategory?.id == category.id ? true : false, label: category.name, color: category.color.getDYColor){
+                                selectedCategory = category
+                            }
+                            Button {
+                                removeCategory = category
+                                alertType = .deleteCategory
+                                isShowingAlert.toggle()
+                            } label: {
+                                Image(systemName: "xmark.circle")
+                                    .font(.wfBody2Font)
+                                    .padding(.horizontal, 5)
+                            }
                         }
                         .padding(.bottom, 5)
                     }
@@ -98,6 +126,7 @@ struct TodoAddView: View {
             
             Spacer()
             Button {
+                alertType = .saveTask
                 isShowingAlert.toggle()
             } label: {
                 Text("Save Task")
@@ -107,20 +136,46 @@ struct TodoAddView: View {
                     .foregroundStyle(Color.white)
                     .background(Color.wfMainBlue)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .disabled(taskText.trimmingCharacters(in: .whitespaces).isEmpty)
             }
-            .alert("할 일 작성", isPresented: $isShowingAlert) {
-                Button("취소", role: .none) {}
-                Button("저장", role: .none) {
-                    let newTodo = Todo(title: taskText, deadline: isTimeSet ? deadline.timeIntervalSince1970 : nil, createDate: Date().timeIntervalSince1970, isChecked: false)
-                    todoStore.addTodo(todo: newTodo)
-                    dismiss()
+            .alert(alertType.titleText, isPresented: $isShowingAlert) {
+                if alertType != .fullCategory {
+                    Button("취소", role: .none) {}
+                }
+                Button(alertType.ConfirmButtonText, role: .none) {
+                    switch alertType {
+                    case .saveTask:
+                        let newTodo = Todo(title: taskText, deadline: isTimeSet ? deadline.timeIntervalSince1970 : nil, createDate: Date().timeIntervalSince1970, isChecked: false, category: selectedCategory)
+                        todoStore.addTodo(todo: newTodo)
+                        dismiss()
+                    case .addCategory:
+                        let newCategory = Category(name: categoryText.trimmingCharacters(in: .whitespaces), color: selectedCategoryColor)
+                        todoStore.addCategorys(category: newCategory)
+                    case .deleteCategory:
+                        guard let category = removeCategory else { return }
+                        todoStore.deleteCategory(categoryId: category.id)
+                    case .fullCategory:
+                        break
+                    }
                 }
             }message: {
-                Text("작성한 할 일을 저장합니다.")
+                switch alertType {
+                case .saveTask:
+                    Text("\(taskText)을(를) 할 일에 추가합니다.")
+                case .addCategory:
+                    Text("\(categoryText)을(를) 카테고리에 추가합니다.")
+                case .deleteCategory:
+                    Text("\(removeCategory?.name ?? "")을(를) 카테고리에서 삭제합니다.")
+                case .fullCategory:
+                    Text("카테고리는 최대 5개까지 설정 가능합니다. 한 개를 삭제해주세요.")
+                }
             }
 
         }
         .padding(20)
+        .onAppear {
+            todoStore.loadCategory()
+        }
     }
 }
 
@@ -165,6 +220,35 @@ struct CategoryRadioButton: View {
             Text(label)
         }
         .fixedSize()
+    }
+
+}
+
+extension TodoAddView.AlertType {
+    var titleText: String {
+        switch self {
+        case .saveTask:
+            "할 일 저장"
+        case .addCategory:
+            "카테고리 추가"
+        case .deleteCategory:
+            "카테고리 삭제"
+        case .fullCategory:
+            "카테고리 최대 수 초과"
+        }
+    }
+    
+    var ConfirmButtonText: String {
+        switch self {
+        case .saveTask:
+            "저장"
+        case .addCategory:
+            "추가"
+        case .deleteCategory:
+            "삭제"
+        case .fullCategory:
+            "확인"
+        }
     }
 
 }
