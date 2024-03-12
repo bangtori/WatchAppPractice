@@ -27,6 +27,7 @@
 		5391C8022B84D59100983B37 /* WfTimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8002B84D59100983B37 /* WfTimerProgressView.swift */; };
 		5391C8052B84EFCD00983B37 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8032B84EFCD00983B37 /* TimerView.swift */; };
 		539918942B85CB020019793B /* TimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539918932B85CB020019793B /* TimerStore.swift */; };
+		53AAC6822BA0174A003401DD /* CategoryColorCode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */; };
 		53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */; };
 		53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD522B7B354D009EB5D5 /* ContentView.swift */; };
 		53ADBD552B7B354E009EB5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53ADBD542B7B354E009EB5D5 /* Assets.xcassets */; };
@@ -164,6 +165,7 @@
 		5391C8002B84D59100983B37 /* WfTimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfTimerProgressView.swift; sourceTree = "<group>"; };
 		5391C8032B84EFCD00983B37 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		539918932B85CB020019793B /* TimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStore.swift; sourceTree = "<group>"; };
+		53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryColorCode+Extension.swift"; sourceTree = "<group>"; };
 		53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFocusApp.swift; sourceTree = "<group>"; };
 		53ADBD522B7B354D009EB5D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				53DFF23E2B973FA10092A2D4 /* UserDefaults+Extension.swift */,
 				53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */,
 				53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */,
+				53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				53ADBDC12B7B42DD009EB5D5 /* Font+Extension.swift in Sources */,
 				5391C7FB2B848E0900983B37 /* Int+Extension.swift in Sources */,
 				53ADBDB42B7B3774009EB5D5 /* Color+Extension.swift in Sources */,
+				53AAC6822BA0174A003401DD /* CategoryColorCode+Extension.swift in Sources */,
 				53ADBDBC2B7B3BBA009EB5D5 /* Double+Extension.swift in Sources */,
 				53DFCD812B8E914700D9C2FE /* WatchFocusWidgetLiveActivity.swift in Sources */,
 				53ADBDD62B7C5630009EB5D5 /* UserDefaultsKeys.swift in Sources */,

@@ -27,7 +27,7 @@ public extension Font {
             .bold()
     }
     
-    // size 14, semibold
+    /// size 14, semibold
     static var wfBody2Font: Font {
         return Font.custom("AppleSDGothicNeo-Bold", size: 14)
             .weight(.semibold)

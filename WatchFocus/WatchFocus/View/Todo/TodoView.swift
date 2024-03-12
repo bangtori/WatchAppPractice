@@ -74,7 +74,6 @@ struct TodoView: View {
         .background(DYColor.wfbackgroundColor.dynamicColor, ignoresSafeAreaEdges: .all)
         .sheet(isPresented: $isShowingAddView) {
             TodoAddView()
-                .presentationDetents([.medium])
         }
         .onAppear {
             DispatchQueue.global().async {
