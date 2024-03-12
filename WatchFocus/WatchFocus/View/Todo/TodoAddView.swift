@@ -173,6 +173,7 @@ struct TodoAddView: View {
 
         }
         .padding(20)
+        .onTapGesture { self.hideKeyboard() } 
         .onAppear {
             todoStore.loadCategory()
         }
