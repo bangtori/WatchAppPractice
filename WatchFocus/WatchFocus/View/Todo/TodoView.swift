@@ -76,9 +76,7 @@ struct TodoView: View {
             TodoAddView()
         }
         .onAppear {
-            DispatchQueue.global().async {
-                todoStore.loadTodo()
-            }
+            todoStore.loadTodo()
         }
         .alert("Todo 전체 삭제", isPresented: $isShowingAlert) {
             Button("취소", role: .none) {}
