@@ -24,3 +24,16 @@ extension DYColor {
     static let wfSubTitleText = DYColor(lightColor: .wfGray, darkColor: .wfLightGray)
     static let wfTextDarkGray = DYColor(lightColor: .wfGray5, darkColor: .wfGray1)
 }
+
+extension DYColor {
+    func setScheme(_ scheme: ColorScheme) -> Color {
+        switch scheme {
+        case .light:
+            return self.getLightColor()
+        case .dark:
+            return self.getDarkColor()
+        @unknown default:
+            return self.getLightColor()
+        }
+    }
+}

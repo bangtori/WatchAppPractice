@@ -29,6 +29,8 @@
 		539918942B85CB020019793B /* TimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539918932B85CB020019793B /* TimerStore.swift */; };
 		53AAC6822BA0174A003401DD /* CategoryColorCode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */; };
 		53AAC6842BA03B53003401DD /* RowBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6832BA03B53003401DD /* RowBackgroundView.swift */; };
+		53AAC6872BA0A590003401DD /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6862BA0A590003401DD /* ShareView.swift */; };
+		53AAC6892BA0ACEE003401DD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6882BA0ACEE003401DD /* Date+Extension.swift */; };
 		53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */; };
 		53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD522B7B354D009EB5D5 /* ContentView.swift */; };
 		53ADBD552B7B354E009EB5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53ADBD542B7B354E009EB5D5 /* Assets.xcassets */; };
@@ -168,6 +170,8 @@
 		539918932B85CB020019793B /* TimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStore.swift; sourceTree = "<group>"; };
 		53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryColorCode+Extension.swift"; sourceTree = "<group>"; };
 		53AAC6832BA03B53003401DD /* RowBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowBackgroundView.swift; sourceTree = "<group>"; };
+		53AAC6862BA0A590003401DD /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		53AAC6882BA0ACEE003401DD /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFocusApp.swift; sourceTree = "<group>"; };
 		53ADBD522B7B354D009EB5D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -439,6 +443,7 @@
 				53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */,
 				53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */,
 				53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */,
+				53AAC6882BA0ACEE003401DD /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 				53ADBDB62B7B3970009EB5D5 /* TodoRowView.swift */,
 				53ADBDC32B7B56BA009EB5D5 /* TodoAddView.swift */,
 				53AAC6832BA03B53003401DD /* RowBackgroundView.swift */,
+				53AAC6862BA0A590003401DD /* ShareView.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -781,6 +787,7 @@
 				53ADBDBE2B7B3EB0009EB5D5 /* TodoStore.swift in Sources */,
 				53ADBDC42B7B56BA009EB5D5 /* TodoAddView.swift in Sources */,
 				53ADBDC12B7B42DD009EB5D5 /* Font+Extension.swift in Sources */,
+				53AAC6892BA0ACEE003401DD /* Date+Extension.swift in Sources */,
 				5391C7FB2B848E0900983B37 /* Int+Extension.swift in Sources */,
 				53ADBDB42B7B3774009EB5D5 /* Color+Extension.swift in Sources */,
 				53AAC6822BA0174A003401DD /* CategoryColorCode+Extension.swift in Sources */,
@@ -790,6 +797,7 @@
 				53B9ABBB2B9C756300EF5AF7 /* View+Extension.swift in Sources */,
 				53ADBDB72B7B3970009EB5D5 /* TodoRowView.swift in Sources */,
 				53ADBDC72B7B5733009EB5D5 /* WfProgressBar.swift in Sources */,
+				53AAC6872BA0A590003401DD /* ShareView.swift in Sources */,
 				53ADBDB92B7B39EA009EB5D5 /* ToDo.swift in Sources */,
 				53ADBDD22B7C545B009EB5D5 /* TimerStore.swift in Sources */,
 				53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */,

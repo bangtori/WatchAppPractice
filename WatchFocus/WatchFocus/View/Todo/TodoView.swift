@@ -18,6 +18,7 @@ struct TodoView: View {
     @Environment(\.colorScheme) var scheme
     @EnvironmentObject private var todoStore: TodoStore
     @State private var isShowingAddView: Bool = false
+    @State private var isShowingShareView: Bool = false
     @State private var isShowingAlert: Bool = false
     @State private var selectedCategory: Category? = nil
     @State private var alertType: AlertType = .allCategoryCheckTask
@@ -126,7 +127,7 @@ struct TodoView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button{
-                   
+                    isShowingShareView.toggle()
                 }label: {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundStyle(DYColor.wfTextDarkGray.dynamicColor)
@@ -159,6 +160,9 @@ struct TodoView: View {
         }
         .sheet(isPresented: $isShowingAddView) {
             TodoAddView()
+        }
+        .navigationDestination(isPresented: $isShowingShareView) {
+            ShareView()
         }
         .onAppear {
             todoStore.loadTodo()
