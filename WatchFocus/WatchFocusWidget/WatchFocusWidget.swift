@@ -76,23 +76,38 @@ struct WatchFocusWidget: Widget {
 }
 
 struct TodoWidgetView: View {
+    @Environment(\.widgetFamily) var widgetFamily
     enum Size {
         case smallSize
         case defaultSize
     }
     let entry: Provider.Entry
     var size: Size
+    var prefixCount: Int {
+        switch widgetFamily {
+        case .systemSmall, .systemMedium :
+            return 3
+        case .systemLarge:
+            return 6
+        case .accessoryRectangular:
+            return 2
+        case .accessoryInline, .accessoryCircular, .systemExtraLarge:
+            return 0
+        @unknown default:
+            return 0
+        }
+    }
     
     var body: some View {
         VStack(alignment: entry.todos.isEmpty ? .center : .leading) {
             Text("Todos")
-                .font(size == .defaultSize ? Font.system(size: 30, weight: .heavy) : Font.system(size: 15, weight: .heavy))
+                .font(size == .defaultSize ? Font.system(size: 25, weight: .heavy) : Font.system(size: 15, weight: .heavy))
                 .padding(.bottom, 5)
             if entry.todos.isEmpty {
                 Text("Complete all Todos")
             } else {
                 VStack {
-                    ForEach(entry.todos) { todo in
+                    ForEach(entry.todos.prefix(prefixCount)) { todo in
                         HStack{
                             Button(intent: CheckTodoIntent(todoId: todo.id)) {
                                 todo.isChecked ? Image(systemName: "checkmark.circle.fill") :
@@ -114,6 +129,7 @@ struct TodoWidgetView: View {
                             }
                             Spacer()
                         }
+                        .padding(.bottom, 3)
                     }
                 }
             }
