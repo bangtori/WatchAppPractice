@@ -71,9 +71,6 @@ struct ToastModifier: ViewModifier {
                 .customOnChange(toast, action: { _, _ in
                     showToast()
                 })
-                .onAppear {
-                    print(geometry.size.height)
-                }
         }
     }
     
