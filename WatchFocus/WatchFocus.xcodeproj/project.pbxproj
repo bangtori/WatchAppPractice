@@ -65,6 +65,7 @@
 		53B9ABB62B9AEB6100EF5AF7 /* DYColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */; };
 		53B9ABB72B9B49D700EF5AF7 /* DYColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */; };
 		53B9ABBB2B9C756300EF5AF7 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */; };
+		53DB6B682BA2E293000BB548 /* WfToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DB6B672BA2E293000BB548 /* WfToastMessageView.swift */; };
 		53DFCD6B2B8E8F8100D9C2FE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DFCD6A2B8E8F8100D9C2FE /* WidgetKit.framework */; };
 		53DFCD6D2B8E8F8100D9C2FE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DFCD6C2B8E8F8100D9C2FE /* SwiftUI.framework */; };
 		53DFCD702B8E8F8100D9C2FE /* WatchFocusWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFCD6F2B8E8F8100D9C2FE /* WatchFocusWidgetBundle.swift */; };
@@ -210,6 +211,7 @@
 		53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DYColor+Extension.swift"; sourceTree = "<group>"; };
 		53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		53DB6B672BA2E293000BB548 /* WfToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfToastMessageView.swift; sourceTree = "<group>"; };
 		53DFCD682B8E8F8100D9C2FE /* WatchFocusWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WatchFocusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		53DFCD6A2B8E8F8100D9C2FE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		53DFCD6C2B8E8F8100D9C2FE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -485,6 +487,7 @@
 				53ADBDC62B7B5733009EB5D5 /* WfProgressBar.swift */,
 				53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */,
 				5391C8002B84D59100983B37 /* WfTimerProgressView.swift */,
+				53DB6B672BA2E293000BB548 /* WfToastMessageView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				53B9ABBB2B9C756300EF5AF7 /* View+Extension.swift in Sources */,
 				53ADBDB72B7B3970009EB5D5 /* TodoRowView.swift in Sources */,
 				53ADBDC72B7B5733009EB5D5 /* WfProgressBar.swift in Sources */,
+				53DB6B682BA2E293000BB548 /* WfToastMessageView.swift in Sources */,
 				53AAC6872BA0A590003401DD /* ShareView.swift in Sources */,
 				53ADBDB92B7B39EA009EB5D5 /* ToDo.swift in Sources */,
 				53ADBDD22B7C545B009EB5D5 /* TimerStore.swift in Sources */,
@@ -1118,6 +1122,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchFocus;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근 허용 - 사진 저장";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1153,6 +1158,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchFocus;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근 허용 - 사진 저장";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

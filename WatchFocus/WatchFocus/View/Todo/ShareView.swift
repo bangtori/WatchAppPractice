@@ -7,13 +7,21 @@
 
 import SwiftUI
 import DYColor
+import Photos
+import UIKit
 
 struct ShareView: View {
     @Environment(\.colorScheme) var scheme
+    @EnvironmentObject var todoStore: TodoStore
     @State private var selectedMode: String = "Light"
-    
-    
+    @State private var isShowingAlert: Bool = false
+    @State private var toast: Toast? = nil
+    @State private var image: UIImage? = nil
     private var modes = ["Light", "Dark"]
+
+    var shareView: some View {
+        PhotoShareView(mode: selectedMode == "Light" ? .light : .dark)
+    }
     
     var body: some View {
         ZStack{
@@ -27,22 +35,46 @@ struct ShareView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 200)
                 .padding()
-                PhotoShareView(mode: selectedMode == "Light" ? .light : .dark)
+                
+                shareView
                     .padding(.bottom, 30)
+
                 Button {
-                    
+                    saveToGallery()
                 } label: {
                     Text("갤러리에 저장")
                 }
                 
             }
         }
+        .toastView(toast: $toast)
         .ignoresSafeArea()
         .navigationTitle("Share")
         .onAppear {
             selectedMode = scheme == .light ? "Light" : "Dark"
         }
     }
+    
+
+    func saveToGallery() {
+        let image = shareView.environmentObject(todoStore).snapshot()
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+            DispatchQueue.main.async {
+                guard status == .authorized, let image = image else { return }
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: image)
+                }) { _, error in
+                    if let error = error {
+                        print("Error: 이미지 저장 실패\n\(error)")
+                        toast = Toast(style: .error, message: "이미지 저장에 실패하였습니다.")
+                        return
+                    }
+                    toast = Toast(style: .success, message: "이미지 저장 성공! 갤러리를 확인해주세요.")
+                }
+            }
+        }
+    }
+
 }
 
 #Preview {
@@ -51,6 +83,7 @@ struct ShareView: View {
             .environmentObject(TodoStore())
     }
 }
+
 
 struct PhotoShareView: View {
     enum Mode {
