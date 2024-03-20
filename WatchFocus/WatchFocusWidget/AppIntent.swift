@@ -8,15 +8,63 @@
 import WidgetKit
 import AppIntents
 
-struct ConfigurationAppIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Configuration"
-    static var description = IntentDescription("This is an example widget.")
-
-    // An example configurable parameter.
-    // MARK: - 나중에 카테고리 추가 후 카테고리 리스트 넣기
-    @Parameter(title: "Favorite Emoji", default: "😃")
-    var favoriteEmoji: String
+struct WidgetCategory: AppEntity {
+    let id: String
+    let category: Category?
     
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Category"
+    static var defaultQuery: CategoryQuery = CategoryQuery()
+    static var defaultsAllCategory =  WidgetCategory(id: "ALL", category: nil)
+    
+    var displayRepresentation: DisplayRepresentation {
+        DisplayRepresentation(title: "\(category?.name ?? "ALL")")
+    }
+    
+    
+    static var allCategoies: [WidgetCategory] = [
+        defaultsAllCategory
+    ]
+}
+
+struct CategoryQuery: EntityQuery {
+    func entities(for identifiers: [WidgetCategory.ID]) async throws -> [WidgetCategory] {
+        WidgetCategory.allCategoies.filter { identifiers.contains($0.id) }
+    }
+    
+    func suggestedEntities() async throws -> [WidgetCategory] {
+        let decoder:JSONDecoder = JSONDecoder()
+        var newWidgetCategorys = [
+            WidgetCategory.defaultsAllCategory
+        ]
+        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.categorys.rawValue) as? Data {
+            if let categorys = try? decoder.decode([Category].self, from: data){
+                categorys.forEach { category in
+                    newWidgetCategorys.append(WidgetCategory(id: UUID().uuidString, category: category))
+                }
+            }
+        }
+        WidgetCategory.allCategoies = newWidgetCategorys
+        return WidgetCategory.allCategoies
+    }
+    
+    func defaultResult() -> WidgetCategory? {
+        WidgetCategory.allCategoies.first
+    }
+}
+
+struct ConfigurationAppIntent: WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "카테고리 선택"
+    static var description = IntentDescription("표시할 Todo의 카테고리를 선택해 주세요.")
+    
+    @Parameter(title: "카테고리 선택")
+    var widgetCategory: WidgetCategory
+    
+    init(category: WidgetCategory) {
+        self.widgetCategory = category
+    }
+    
+    
+    init() {}
 }
 
 struct CheckTodoIntent: AppIntent {

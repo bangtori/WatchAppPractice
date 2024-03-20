@@ -7,14 +7,15 @@
 
 import WidgetKit
 import SwiftUI
+import DYColor
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), todos: [])
+        SimpleEntry(date: Date(), todos: [], configuration: ConfigurationAppIntent(category: WidgetCategory.defaultsAllCategory))
     }
     
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), todos: [Todo(title: "Todo1", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false)])
+        SimpleEntry(date: Date(), todos: [Todo(title: "Todo1", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false)], configuration: ConfigurationAppIntent(category: WidgetCategory.defaultsAllCategory))
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -31,7 +32,7 @@ struct Provider: AppIntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, todos: todos)
+            let entry = SimpleEntry(date: entryDate, todos: todos, configuration: configuration)
             entries.append(entry)
         }
         
@@ -42,7 +43,7 @@ struct Provider: AppIntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     var todos: [Todo]
-    //    let configuration: ConfigurationAppIntent
+    let configuration: ConfigurationAppIntent
 }
 
 struct WatchFocusWidgetEntryView : View {
@@ -77,6 +78,7 @@ struct WatchFocusWidget: Widget {
 
 struct TodoWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.colorScheme) var scheme
     enum Size {
         case smallSize
         case defaultSize
@@ -97,17 +99,31 @@ struct TodoWidgetView: View {
             return 0
         }
     }
+    var todos:[Todo] {
+        entry.todos.filter {
+            if let entryCategory = entry.configuration.widgetCategory.category {
+                return $0.category?.id == entryCategory.id
+            } else {
+                return true
+            }
+        }
+    }
     
     var body: some View {
-        VStack(alignment: entry.todos.isEmpty ? .center : .leading) {
-            Text("Todos")
-                .font(size == .defaultSize ? Font.system(size: 25, weight: .heavy) : Font.system(size: 15, weight: .heavy))
+        VStack(alignment: .leading) {
+            Text(entry.configuration.widgetCategory.category?.name ?? "Todos")
+                .font(Font.system(size: 20, weight: .heavy))
                 .padding(.bottom, 5)
-            if entry.todos.isEmpty {
+            if todos.isEmpty {
+                Spacer()
                 Text("Complete all Todos")
+                    .frame(maxWidth: .infinity)
+                    .font(.wfTitleFont)
+                    .bold()
+                Spacer()
             } else {
                 VStack {
-                    ForEach(entry.todos.prefix(prefixCount)) { todo in
+                    ForEach(todos.prefix(prefixCount)) { todo in
                         HStack{
                             Button(intent: CheckTodoIntent(todoId: todo.id)) {
                                 todo.isChecked ? Image(systemName: "checkmark.circle.fill") :
@@ -115,7 +131,7 @@ struct TodoWidgetView: View {
                             }
                             .buttonStyle(.plain)
                             .font(size == .defaultSize ? Font.system(size: 20) : Font.system(size: 15))
-                            .foregroundStyle(Color.wfMainPurple)
+                            .foregroundStyle(todo.category?.color.getDYColor.dynamicColor ?? DYColor.wfBlackWhite.dynamicColor)
                             .padding(.trailing, 5)
                             
                             VStack(alignment: .leading) {
