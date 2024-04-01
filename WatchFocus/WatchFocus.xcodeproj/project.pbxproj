@@ -33,6 +33,9 @@
 		53AAC6842BA03B53003401DD /* RowBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6832BA03B53003401DD /* RowBackgroundView.swift */; };
 		53AAC6872BA0A590003401DD /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6862BA0A590003401DD /* ShareView.swift */; };
 		53AAC6892BA0ACEE003401DD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6882BA0ACEE003401DD /* Date+Extension.swift */; };
+		53AAEB0E2BBA8D98007FE2E2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 53AAEB0D2BBA8D98007FE2E2 /* RealmSwift */; };
+		53AAEB102BBA8DAD007FE2E2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 53AAEB0F2BBA8DAD007FE2E2 /* RealmSwift */; };
+		53AAEB142BBA8DCA007FE2E2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 53AAEB132BBA8DCA007FE2E2 /* RealmSwift */; };
 		53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */; };
 		53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD522B7B354D009EB5D5 /* ContentView.swift */; };
 		53ADBD552B7B354E009EB5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53ADBD542B7B354E009EB5D5 /* Assets.xcassets */; };
@@ -233,6 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53AAEB0E2BBA8D98007FE2E2 /* RealmSwift in Frameworks */,
 				53271E552B9F218400C82C2D /* DYColor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53AAEB102BBA8DAD007FE2E2 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53AAEB142BBA8DCA007FE2E2 /* RealmSwift in Frameworks */,
 				53271E592B9F4ACB00C82C2D /* DYColor in Frameworks */,
 				53DFCD6D2B8E8F8100D9C2FE /* SwiftUI.framework in Frameworks */,
 				53DFCD6B2B8E8F8100D9C2FE /* WidgetKit.framework in Frameworks */,
@@ -547,6 +553,7 @@
 			name = WatchFocus;
 			packageProductDependencies = (
 				53271E542B9F218400C82C2D /* DYColor */,
+				53AAEB0D2BBA8D98007FE2E2 /* RealmSwift */,
 			);
 			productName = WatchFocus;
 			productReference = 53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */;
@@ -601,6 +608,9 @@
 			dependencies = (
 			);
 			name = "WatchFocus Watch App";
+			packageProductDependencies = (
+				53AAEB0F2BBA8DAD007FE2E2 /* RealmSwift */,
+			);
 			productName = "WatchFocus Watch App";
 			productReference = 53ADBD732B7B354E009EB5D5 /* WatchFocus Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -637,6 +647,8 @@
 				53ADBD912B7B354F009EB5D5 /* PBXTargetDependency */,
 			);
 			name = "WatchFocus Watch AppUITests";
+			packageProductDependencies = (
+			);
 			productName = "WatchFocus Watch AppUITests";
 			productReference = 53ADBD8F2B7B354F009EB5D5 /* WatchFocus Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -656,6 +668,7 @@
 			name = WatchFocusWidgetExtension;
 			packageProductDependencies = (
 				53271E582B9F4ACB00C82C2D /* DYColor */,
+				53AAEB132BBA8DCA007FE2E2 /* RealmSwift */,
 			);
 			productName = WatchFocusWidgetExtension;
 			productReference = 53DFCD682B8E8F8100D9C2FE /* WatchFocusWidgetExtension.appex */;
@@ -709,6 +722,7 @@
 			mainGroup = 53ADBD442B7B354C009EB5D5;
 			packageReferences = (
 				53271E532B9F213B00C82C2D /* XCRemoteSwiftPackageReference "DYColor" */,
+				53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 53ADBD4E2B7B354D009EB5D5 /* Products */;
 			projectDirPath = "";
@@ -1500,6 +1514,14 @@
 				kind = branch;
 			};
 		};
+		53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1512,6 +1534,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 53271E532B9F213B00C82C2D /* XCRemoteSwiftPackageReference "DYColor" */;
 			productName = DYColor;
+		};
+		53AAEB0D2BBA8D98007FE2E2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		53AAEB0F2BBA8DAD007FE2E2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		53AAEB132BBA8DCA007FE2E2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

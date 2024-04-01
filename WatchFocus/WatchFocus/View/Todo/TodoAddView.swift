@@ -145,8 +145,15 @@ struct TodoAddView: View {
                 Button(alertType.ConfirmButtonText, role: .none) {
                     switch alertType {
                     case .saveTask:
-                        let newTodo = Todo(title: taskText, deadline: isTimeSet ? deadline.timeIntervalSince1970 : nil, createDate: Date().timeIntervalSince1970, isChecked: false, category: selectedCategory)
-                        todoStore.addTodo(todo: newTodo)
+//                        let newTodo = Todo(title: taskText, deadline: isTimeSet ? deadline.timeIntervalSince1970 : nil, createDate: Date().timeIntervalSince1970, isChecked: false, category: selectedCategory)
+//                        todoStore.addTodo(todo: newTodo)
+                        let todoObj = TodoObject()
+                        todoObj.title = taskText
+                        todoObj.deadline = isTimeSet ? deadline.timeIntervalSince1970 : nil
+                        todoObj.createDate = Date().timeIntervalSince1970
+                        todoObj.isChecked = false
+                        todoObj.categoryId = selectedCategory?.id
+                        todoStore.addTodo(todo: todoObj)
                         dismiss()
                     case .addCategory:
                         let newCategory = Category(name: categoryText.trimmingCharacters(in: .whitespaces), color: selectedCategoryColor)

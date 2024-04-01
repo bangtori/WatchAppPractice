@@ -165,7 +165,6 @@ struct TodoView: View {
             ShareView()
         }
         .onAppear {
-            todoStore.loadTodo()
             todoStore.loadCategory()
         }
         .alert("할 일 삭제", isPresented: $isShowingAlert) {

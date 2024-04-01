@@ -8,11 +8,13 @@
 import Foundation
 import WatchConnectivity
 import WidgetKit
+import RealmSwift
 
 class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
+    @ObservedResults(TodoObject.self) var todoObjects
     @Published var todos: [Todo] = [] {
         didSet {
-            saveTodo()
+            sendToWatch()
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
@@ -23,6 +25,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
+    private var token: NotificationToken?
     var session: WCSession
     var progress: Double {
         if todos.count == 0 { return 0.0 }
@@ -35,6 +38,26 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         super.init()
         session.delegate = self
         session.activate()
+        setupObserver()
+    }
+    
+    deinit {
+        token?.invalidate()
+    }
+    
+    private func setupObserver() {
+        do {
+            let realm = try Realm()
+            let results = realm.objects(TodoObject.self)
+            
+            token = results.observe({ [weak self] changes in
+                self?.todos = results.map(Todo.init)
+                    .sorted(by: { $0.createDate < $1.createDate })
+            })
+        } catch let error {
+            print("옵저버 셋팅 실패")
+            print(error.localizedDescription)
+        }
     }
     
     func getCategoryProgress(_ categoryId: String) -> Double {
@@ -45,9 +68,19 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     }
     
     func checkTodo(todoId: String) {
-        guard let index = todos.firstIndex(where: {$0.id == todoId }) else { return }
-        todos[index].checkTodo()
-        sendToWatch()
+        do {
+            let realm = try Realm()
+            let objectId = try ObjectId(string: todoId)
+            let todo = realm.object(ofType: TodoObject.self, forPrimaryKey: objectId)
+            if let todo = todo {
+                try realm.write {
+                    todo.isChecked.toggle()
+                    realm.add(todo, update: .modified)
+                }
+            }
+        } catch {
+            print("업데이트 실패(할일 체크 실패): \(error.localizedDescription)")
+        }
     }
     
     func loadCategory() {
@@ -59,57 +92,99 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
-    func loadTodo() {
-        let decoder:JSONDecoder = JSONDecoder()
-        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
-            if let saveData = try? decoder.decode([Todo].self, from: data){
-                todos = saveData
-            }
-        }
-        sendToWatch()
-    }
     
     func addCategorys(category: Category) {
         categorys.append(category)
     }
     
-    func addTodo(todo: Todo) {
-        todos.append(todo)
-        sendToWatch()
+    func addTodo(todo: TodoObject) {
+        $todoObjects.append(todo)
     }
     
     func deleteCategory(categoryId: String) {
         guard let index = categorys.firstIndex(where: {$0.id == categoryId }) else { return }
+        do {
+            let realm = try Realm()
+            let deleteCategoryTodos = realm.objects(TodoObject.self).where {
+                $0.categoryId.equals(categoryId)
+            }
+            try realm.write {
+                deleteCategoryTodos.forEach {
+                    $0.categoryId = nil
+                }
+                realm.add(deleteCategoryTodos, update: .modified)
+            }
+        } catch {
+            print("해당 카테고리 todo 초기화 실패 : \(error.localizedDescription)")
+        }
         categorys.remove(at: index)
     }
     
     func deleteTodo(todoId: String) {
-        guard let index = todos.firstIndex(where: {$0.id == todoId }) else { return }
-        todos.remove(at: index)
-        sendToWatch()
+        do {
+            let realm = try Realm()
+            let objectId = try ObjectId(string: todoId)
+            if let todo = realm.object(ofType: TodoObject.self, forPrimaryKey: objectId) {
+                try realm.write {
+                    realm.delete(todo)
+                }
+            }
+        } catch {
+            print("데이터 삭제 실패 : \(error)")
+        }
     }
     
     func deleteAllTodo(isCheck: Bool) {
         if isCheck {
-            todos = todos.filter{ !$0.isChecked }
+            do {
+                let realm = try Realm()
+                let deleteTodos = realm.objects(TodoObject.self).where {
+                    $0.isChecked
+                }
+                try realm.write {
+                    realm.delete(deleteTodos)
+                }
+            } catch {
+                print("체크 데이터 전체 삭제 실패 : \(error.localizedDescription)")
+            }
         } else {
-            todos = []
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    realm.deleteAll()
+                }
+            } catch {
+                print("데이터 전체 삭제 실패 : \(error.localizedDescription)")
+            }
         }
-        sendToWatch()
     }
     
     func deleteCategoryTodo(categoryId: String, isCheck: Bool) {
         if isCheck {
-            todos = todos.filter {
-                if $0.category?.id == categoryId {
-                    return !$0.isChecked
+            do {
+                let realm = try Realm()
+                let deleteTodos = todoObjects.filter {
+                    $0.categoryId == categoryId && $0.isChecked
                 }
-                return true
+                try realm.write {
+                    realm.delete(deleteTodos)
+                }
+            } catch {
+                print("카테고리 선택 데이터 삭제 실패 : \(error.localizedDescription)")
             }
         } else {
-            todos = todos.filter{ $0.category?.id != categoryId }
+            do {
+                let realm = try Realm()
+                let deleteTodos = todoObjects.filter {
+                    $0.categoryId == categoryId
+                }
+                try realm.write {
+                    realm.delete(deleteTodos)
+                }
+            } catch {
+                print("카테고리 데이터 전체 삭제 실패 : \(error.localizedDescription)")
+            }
         }
-        sendToWatch()
     }
     private func saveTodo(){
         let encoder:JSONEncoder = JSONEncoder()
