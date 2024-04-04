@@ -7,6 +7,7 @@
 
 import WidgetKit
 import AppIntents
+import RealmSwift
 
 struct WidgetCategory: AppEntity {
     let id: String
@@ -78,21 +79,24 @@ struct CheckTodoIntent: AppIntent {
         self.todoId = todoId
     }
     init() {}
-    func perform() async throws -> some IntentResult {
-        
-        let decoder:JSONDecoder = JSONDecoder()
-        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
-            if let saveData = try? decoder.decode([Todo].self, from: data){
-                var tempTodos = saveData
-                guard let index = saveData.firstIndex(where: {$0.id == todoId }) else {
-                    return .result()
-                }
-                tempTodos[index].checkTodo()
-                let encoder:JSONEncoder = JSONEncoder()
-                if let encoded = try? encoder.encode(tempTodos){
-                    UserDefaults.groupShared.set(encoded, forKey: UserDefaultsKeys.todo.rawValue)
+    
+    @MainActor func perform() async throws -> some IntentResult {
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.watchFocus")
+        let realmURL = container?.appendingPathComponent("default.realm")
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+        do {
+            let objectId = try ObjectId(string: todoId)
+            let realm = try await Realm(configuration: config)
+            let todo = realm.object(ofType: TodoObject.self, forPrimaryKey: objectId)
+            
+            try realm.write {
+                if let todo = todo {
+                    todo.isChecked.toggle()
+                    realm.add(todo, update: .modified)
                 }
             }
+        } catch {
+            print("Realm 불러오기 실패 : \(error.localizedDescription)")
         }
         return .result()
     }

@@ -32,21 +32,11 @@ struct Todo: Identifiable, Codable {
         self.deadline = todoObj.deadline
         self.createDate = todoObj.createDate
         self.isChecked = todoObj.isChecked
-        self.category = idToCategory(withId: todoObj.categoryId)
+        self.category = Category.idToCategory(withId: todoObj.categoryId)
         
-    }
-    
-    func idToCategory(withId id: String?) -> Category? {
-        let decoder:JSONDecoder = JSONDecoder()
-        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.categorys.rawValue) as? Data{
-            if let categories = try? decoder.decode([Category].self, from: data){
-                return categories.first { $0.id == id }
-            }
-        }
-        
-        return nil
     }
     #endif
+
     
     mutating func checkTodo(){
         isChecked = !self.isChecked
@@ -63,6 +53,19 @@ struct Category: Identifiable, Codable {
         self.name = name
         self.color = color
     }
+    
+    #if os(iOS)
+    static func idToCategory(withId id: String?) -> Category? {
+        let decoder:JSONDecoder = JSONDecoder()
+        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.categorys.rawValue) as? Data{
+            if let categories = try? decoder.decode([Category].self, from: data){
+                return categories.first { $0.id == id }
+            }
+        }
+        
+        return nil
+    }
+    #endif
 }
 
 enum CategoryColorCode: String, Codable, CaseIterable, PersistableEnum {
@@ -81,6 +84,14 @@ class TodoObject: Object, Identifiable {
     @Persisted var isChecked: Bool
     @Persisted var categoryId: String?
     
+    convenience init(id: String = UUID().uuidString, title: String, deadline: Double? = nil, createDate: Double = Date().timeIntervalSince1970, isChecked: Bool, category: String? = nil) {
+        self.init()
+        self.title = title
+        self.deadline = deadline
+        self.createDate = createDate
+        self.isChecked = isChecked
+        self.categoryId = category
+    }
 }
 
 //class CategoryObject: Object, Identifiable {

@@ -26,6 +26,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     }
     
     private var token: NotificationToken?
+    
     var session: WCSession
     var progress: Double {
         if todos.count == 0 { return 0.0 }
@@ -47,7 +48,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     
     private func setupObserver() {
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: returnRealmConfig())
             let results = realm.objects(TodoObject.self)
             
             token = results.observe({ [weak self] changes in
@@ -60,6 +61,13 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
+    private func returnRealmConfig() -> Realm.Configuration {
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.watchFocus")
+        let realmURL = container?.appendingPathComponent("default.realm")
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+        return config
+    }
+    
     func getCategoryProgress(_ categoryId: String) -> Double {
         let categoryTodos = todos.filter{ $0.category?.id == categoryId }
         if categoryTodos.count == 0 { return 0.0 }
@@ -69,7 +77,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     
     func checkTodo(todoId: String) {
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: returnRealmConfig())
             let objectId = try ObjectId(string: todoId)
             let todo = realm.object(ofType: TodoObject.self, forPrimaryKey: objectId)
             if let todo = todo {
@@ -104,7 +112,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     func deleteCategory(categoryId: String) {
         guard let index = categorys.firstIndex(where: {$0.id == categoryId }) else { return }
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: returnRealmConfig())
             let deleteCategoryTodos = realm.objects(TodoObject.self).where {
                 $0.categoryId.equals(categoryId)
             }
@@ -122,7 +130,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     
     func deleteTodo(todoId: String) {
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: returnRealmConfig())
             let objectId = try ObjectId(string: todoId)
             if let todo = realm.object(ofType: TodoObject.self, forPrimaryKey: objectId) {
                 try realm.write {
@@ -137,7 +145,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     func deleteAllTodo(isCheck: Bool) {
         if isCheck {
             do {
-                let realm = try Realm()
+                let realm = try Realm(configuration: returnRealmConfig())
                 let deleteTodos = realm.objects(TodoObject.self).where {
                     $0.isChecked
                 }
@@ -149,7 +157,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
             }
         } else {
             do {
-                let realm = try Realm()
+                let realm = try Realm(configuration: returnRealmConfig())
                 try realm.write {
                     realm.deleteAll()
                 }
@@ -162,7 +170,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
     func deleteCategoryTodo(categoryId: String, isCheck: Bool) {
         if isCheck {
             do {
-                let realm = try Realm()
+                let realm = try Realm(configuration: returnRealmConfig())
                 let deleteTodos = todoObjects.filter {
                     $0.categoryId == categoryId && $0.isChecked
                 }
@@ -174,7 +182,7 @@ class TodoStore: NSObject, WCSessionDelegate, ObservableObject {
             }
         } else {
             do {
-                let realm = try Realm()
+                let realm = try Realm(configuration: returnRealmConfig())
                 let deleteTodos = todoObjects.filter {
                     $0.categoryId == categoryId
                 }

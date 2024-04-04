@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import UserNotifications
+import RealmSwift
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -20,6 +21,26 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 print("Error: \(error.localizedDescription)")
             }
         }
+        
+        let defaultRealm = Realm.Configuration.defaultConfiguration.fileURL!
+            let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.watchFocus")
+            let realmURL = container?.appendingPathComponent("default.realm")
+            var config: Realm.Configuration!
+
+            // Checking the old realm config is exist
+            if FileManager.default.fileExists(atPath: defaultRealm.path) {
+                do {
+                    _ = try FileManager.default.replaceItemAt(realmURL!, withItemAt: defaultRealm)
+                   config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+                } catch {
+                   print("Error info: \(error)")
+                }
+            } else {
+                 config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+            }
+
+            Realm.Configuration.defaultConfiguration = config
+
         return true
     }
     

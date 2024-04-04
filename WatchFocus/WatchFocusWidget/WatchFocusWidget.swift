@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 import DYColor
+import RealmSwift
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -15,17 +16,12 @@ struct Provider: AppIntentTimelineProvider {
     }
     
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), todos: [Todo(title: "Todo1", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false)], configuration: ConfigurationAppIntent(category: WidgetCategory.defaultsAllCategory))
+        SimpleEntry(date: Date(), todos: [TodoObject(title: "Todo1", deadline: nil, createDate: Date().timeIntervalSince1970, isChecked: false)], configuration: ConfigurationAppIntent(category: WidgetCategory.defaultsAllCategory))
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var todos: [Todo] = []
-        let decoder:JSONDecoder = JSONDecoder()
-        if let data = UserDefaults.groupShared.object(forKey: UserDefaultsKeys.todo.rawValue) as? Data{
-            if let saveData = try? decoder.decode([Todo].self, from: data){
-                todos = saveData.filter { $0.isChecked == false }
-            }
-        }
+        let todos: [TodoObject] = await loadTodo()
+        
         var entries: [SimpleEntry] = []
         
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -38,11 +34,30 @@ struct Provider: AppIntentTimelineProvider {
         
         return Timeline(entries: entries, policy: .atEnd)
     }
+    
+    private func loadTodo() async -> [TodoObject] {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.main.async {
+                let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.watchFocus")
+                let realmURL = container?.appendingPathComponent("default.realm")
+                let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+                do {
+                    let realm = try Realm(configuration: config)
+                    let results = realm.objects(TodoObject.self)
+                    let todos = Array(results.filter{ !$0.isChecked })
+                    continuation.resume(returning: todos)
+                } catch {
+                    print("Realm 불러오기 실패 : \(error.localizedDescription)")
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+    }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    var todos: [Todo]
+    var todos: [TodoObject]
     let configuration: ConfigurationAppIntent
 }
 
@@ -99,10 +114,14 @@ struct TodoWidgetView: View {
             return 0
         }
     }
-    var todos:[Todo] {
+    var todos:[TodoObject] {
         entry.todos.filter {
             if let entryCategory = entry.configuration.widgetCategory.category {
-                return $0.category?.id == entryCategory.id
+                if let categoryid = $0.categoryId {
+                    return Category.idToCategory(withId: categoryid)?.id == entryCategory.id
+                } else {
+                    return false
+                }
             } else {
                 return true
             }
@@ -125,13 +144,13 @@ struct TodoWidgetView: View {
                 VStack {
                     ForEach(todos.prefix(prefixCount)) { todo in
                         HStack{
-                            Button(intent: CheckTodoIntent(todoId: todo.id)) {
+                            Button(intent: CheckTodoIntent(todoId: todo.id.stringValue)) {
                                 todo.isChecked ? Image(systemName: "checkmark.circle.fill") :
                                 Image(systemName: "circle")
                             }
                             .buttonStyle(.plain)
                             .font(size == .defaultSize ? Font.system(size: 20) : Font.system(size: 15))
-                            .foregroundStyle(todo.category?.color.getDYColor.dynamicColor ?? DYColor.wfBlackWhite.dynamicColor)
+                            .foregroundStyle(Category.idToCategory(withId: todo.categoryId)?.color.getDYColor.dynamicColor ?? DYColor.wfBlackWhite.dynamicColor)
                             .padding(.trailing, 5)
                             
                             VStack(alignment: .leading) {
