@@ -8,6 +8,7 @@
 import ActivityKit
 import WidgetKit
 import SwiftUI
+import DYColor
 
 struct WatchFocusWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
@@ -19,7 +20,7 @@ struct WatchFocusWidgetAttributes: ActivityAttributes {
     var totalTime: Int
     var timerType: TimerType
     var iterationCount: Int
-    var progressColor: WfColor {
+    var progressColor: DYColor {
         return timerType == .focus ? .wfMainPurple : .wfMainBlue
     }
 }
@@ -38,11 +39,11 @@ struct WatchFocusWidgetLiveActivity: Widget {
                 HStack {
                     Text("0 m")
                         .font(.wfCalloutFont)
-                        .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                        .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
                     WfProgressBar(progress: 1.0 - context.state.progress, progressColor: context.attributes.progressColor)
                     Text("\(context.attributes.totalTime / 60) m")
                         .font(.wfCalloutFont)
-                        .foregroundStyle(WfColor.wfGray.returnColor(scheme: scheme))
+                        .foregroundStyle(DYColor.wfSubTitleText.dynamicColor)
                 }
                 .padding()
                 if context.attributes.timerType == .focus {
@@ -92,7 +93,7 @@ struct WatchFocusWidgetLiveActivity: Widget {
                         .stroke(Color.gray, lineWidth: 3)
                     Circle()
                         .trim(from: 0.0, to: CGFloat(min(context.state.progress, 1.0)))
-                        .stroke(context.attributes.progressColor.returnColor(scheme: scheme), style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                        .stroke(context.attributes.progressColor.dynamicColor, style: StrokeStyle(lineWidth: 3, lineCap: .round))
                         .rotationEffect(Angle(degrees: -90))
                 }
                 .padding(2)

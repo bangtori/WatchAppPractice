@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		532402C92B8711150035A8FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532402C82B8711150035A8FD /* AppDelegate.swift */; };
+		53271E552B9F218400C82C2D /* DYColor in Frameworks */ = {isa = PBXBuildFile; productRef = 53271E542B9F218400C82C2D /* DYColor */; };
+		53271E572B9F49F700C82C2D /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53271E562B9F49F700C82C2D /* Color+Extension.swift */; };
+		53271E592B9F4ACB00C82C2D /* DYColor in Frameworks */ = {isa = PBXBuildFile; productRef = 53271E582B9F4ACB00C82C2D /* DYColor */; };
 		5329BEFB2B8478FC004AFEAD /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDB82B7B39EA009EB5D5 /* ToDo.swift */; };
 		5329BEFC2B8478FF004AFEAD /* TimerSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */; };
 		5329BEFD2B847902004AFEAD /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */; };
-		5329BEFE2B84790C004AFEAD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDB32B7B3774009EB5D5 /* Color+Extension.swift */; };
 		5329BEFF2B84790E004AFEAD /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDBB2B7B3BBA009EB5D5 /* Double+Extension.swift */; };
 		5329BF002B847912004AFEAD /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDC02B7B42DD009EB5D5 /* Font+Extension.swift */; };
+		53648F932BA9DB32004B82A1 /* CategoryColorCode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */; };
+		53648F942BA9E6A6004B82A1 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFCD752B8E8F8100D9C2FE /* AppIntent.swift */; };
 		536BBFE82B82EA97005C5AEB /* TotalFocusTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BBFE72B82EA97005C5AEB /* TotalFocusTimeService.swift */; };
 		5391C7F22B848D1D00983B37 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C7F12B848D1D00983B37 /* TodoView.swift */; };
 		5391C7F42B848D2500983B37 /* TimerSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C7F32B848D2500983B37 /* TimerSettingView.swift */; };
@@ -25,6 +29,13 @@
 		5391C8022B84D59100983B37 /* WfTimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8002B84D59100983B37 /* WfTimerProgressView.swift */; };
 		5391C8052B84EFCD00983B37 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391C8032B84EFCD00983B37 /* TimerView.swift */; };
 		539918942B85CB020019793B /* TimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539918932B85CB020019793B /* TimerStore.swift */; };
+		53AAC6822BA0174A003401DD /* CategoryColorCode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */; };
+		53AAC6842BA03B53003401DD /* RowBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6832BA03B53003401DD /* RowBackgroundView.swift */; };
+		53AAC6872BA0A590003401DD /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6862BA0A590003401DD /* ShareView.swift */; };
+		53AAC6892BA0ACEE003401DD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAC6882BA0ACEE003401DD /* Date+Extension.swift */; };
+		53AAEB0E2BBA8D98007FE2E2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 53AAEB0D2BBA8D98007FE2E2 /* RealmSwift */; };
+		53AAEB102BBA8DAD007FE2E2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 53AAEB0F2BBA8DAD007FE2E2 /* RealmSwift */; };
+		53AAEB142BBA8DCA007FE2E2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 53AAEB132BBA8DCA007FE2E2 /* RealmSwift */; };
 		53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */; };
 		53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBD522B7B354D009EB5D5 /* ContentView.swift */; };
 		53ADBD552B7B354E009EB5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53ADBD542B7B354E009EB5D5 /* Assets.xcassets */; };
@@ -56,10 +67,10 @@
 		53ADBDD22B7C545B009EB5D5 /* TimerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD12B7C545B009EB5D5 /* TimerStore.swift */; };
 		53ADBDD42B7C5470009EB5D5 /* TimerSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */; };
 		53ADBDD62B7C5630009EB5D5 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */; };
-		53B9ABB62B9AEB6100EF5AF7 /* WfColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* WfColor.swift */; };
-		53B9ABB72B9B49D700EF5AF7 /* WfColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* WfColor.swift */; };
-		53B9ABB82B9B49D800EF5AF7 /* WfColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* WfColor.swift */; };
+		53B9ABB62B9AEB6100EF5AF7 /* DYColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */; };
+		53B9ABB72B9B49D700EF5AF7 /* DYColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */; };
 		53B9ABBB2B9C756300EF5AF7 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */; };
+		53DB6B682BA2E293000BB548 /* WfToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DB6B672BA2E293000BB548 /* WfToastMessageView.swift */; };
 		53DFCD6B2B8E8F8100D9C2FE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DFCD6A2B8E8F8100D9C2FE /* WidgetKit.framework */; };
 		53DFCD6D2B8E8F8100D9C2FE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DFCD6C2B8E8F8100D9C2FE /* SwiftUI.framework */; };
 		53DFCD702B8E8F8100D9C2FE /* WatchFocusWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFCD6F2B8E8F8100D9C2FE /* WatchFocusWidgetBundle.swift */; };
@@ -153,6 +164,7 @@
 
 /* Begin PBXFileReference section */
 		532402C82B8711150035A8FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		53271E562B9F49F700C82C2D /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		536BBFE72B82EA97005C5AEB /* TotalFocusTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalFocusTimeService.swift; sourceTree = "<group>"; };
 		5391C7F12B848D1D00983B37 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		5391C7F32B848D2500983B37 /* TimerSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingView.swift; sourceTree = "<group>"; };
@@ -162,6 +174,10 @@
 		5391C8002B84D59100983B37 /* WfTimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfTimerProgressView.swift; sourceTree = "<group>"; };
 		5391C8032B84EFCD00983B37 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		539918932B85CB020019793B /* TimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStore.swift; sourceTree = "<group>"; };
+		53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryColorCode+Extension.swift"; sourceTree = "<group>"; };
+		53AAC6832BA03B53003401DD /* RowBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowBackgroundView.swift; sourceTree = "<group>"; };
+		53AAC6862BA0A590003401DD /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		53AAC6882BA0ACEE003401DD /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ADBD502B7B354D009EB5D5 /* WatchFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFocusApp.swift; sourceTree = "<group>"; };
 		53ADBD522B7B354D009EB5D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -198,8 +214,9 @@
 		53ADBDD12B7C545B009EB5D5 /* TimerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStore.swift; sourceTree = "<group>"; };
 		53ADBDD32B7C5470009EB5D5 /* TimerSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSetting.swift; sourceTree = "<group>"; };
 		53ADBDD52B7C5630009EB5D5 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		53B9ABB52B9AEB6100EF5AF7 /* WfColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfColor.swift; sourceTree = "<group>"; };
+		53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DYColor+Extension.swift"; sourceTree = "<group>"; };
 		53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		53DB6B672BA2E293000BB548 /* WfToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfToastMessageView.swift; sourceTree = "<group>"; };
 		53DFCD682B8E8F8100D9C2FE /* WatchFocusWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WatchFocusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		53DFCD6A2B8E8F8100D9C2FE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		53DFCD6C2B8E8F8100D9C2FE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -219,6 +236,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53AAEB0E2BBA8D98007FE2E2 /* RealmSwift in Frameworks */,
+				53271E552B9F218400C82C2D /* DYColor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53AAEB102BBA8DAD007FE2E2 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +281,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53AAEB142BBA8DCA007FE2E2 /* RealmSwift in Frameworks */,
+				53271E592B9F4ACB00C82C2D /* DYColor in Frameworks */,
 				53DFCD6D2B8E8F8100D9C2FE /* SwiftUI.framework in Frameworks */,
 				53DFCD6B2B8E8F8100D9C2FE /* WidgetKit.framework in Frameworks */,
 			);
@@ -377,6 +399,7 @@
 				53ADBD782B7B354E009EB5D5 /* WatchFocusApp.swift */,
 				53ADBD7A2B7B354E009EB5D5 /* ContentView.swift */,
 				53ADBD7C2B7B354E009EB5D5 /* Assets.xcassets */,
+				53271E562B9F49F700C82C2D /* Color+Extension.swift */,
 				5391C7F52B848D2900983B37 /* View */,
 				5391C7F82B848D6800983B37 /* ViewModel */,
 				53ADBD7E2B7B354E009EB5D5 /* Preview Content */,
@@ -428,6 +451,9 @@
 				5391C7FA2B848E0900983B37 /* Int+Extension.swift */,
 				53DFF23E2B973FA10092A2D4 /* UserDefaults+Extension.swift */,
 				53B9ABBA2B9C756300EF5AF7 /* View+Extension.swift */,
+				53B9ABB52B9AEB6100EF5AF7 /* DYColor+Extension.swift */,
+				53AAC6812BA0174A003401DD /* CategoryColorCode+Extension.swift */,
+				53AAC6882BA0ACEE003401DD /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -457,6 +483,8 @@
 				53ADBDAE2B7B369E009EB5D5 /* TodoView.swift */,
 				53ADBDB62B7B3970009EB5D5 /* TodoRowView.swift */,
 				53ADBDC32B7B56BA009EB5D5 /* TodoAddView.swift */,
+				53AAC6832BA03B53003401DD /* RowBackgroundView.swift */,
+				53AAC6862BA0A590003401DD /* ShareView.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -467,7 +495,7 @@
 				53ADBDC62B7B5733009EB5D5 /* WfProgressBar.swift */,
 				53ADBDC82B7B5778009EB5D5 /* WfTodoTextField.swift */,
 				5391C8002B84D59100983B37 /* WfTimerProgressView.swift */,
-				53B9ABB52B9AEB6100EF5AF7 /* WfColor.swift */,
+				53DB6B672BA2E293000BB548 /* WfToastMessageView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -523,6 +551,10 @@
 				53DFCD7B2B8E8F8300D9C2FE /* PBXTargetDependency */,
 			);
 			name = WatchFocus;
+			packageProductDependencies = (
+				53271E542B9F218400C82C2D /* DYColor */,
+				53AAEB0D2BBA8D98007FE2E2 /* RealmSwift */,
+			);
 			productName = WatchFocus;
 			productReference = 53ADBD4D2B7B354D009EB5D5 /* WatchFocus.app */;
 			productType = "com.apple.product-type.application";
@@ -576,6 +608,9 @@
 			dependencies = (
 			);
 			name = "WatchFocus Watch App";
+			packageProductDependencies = (
+				53AAEB0F2BBA8DAD007FE2E2 /* RealmSwift */,
+			);
 			productName = "WatchFocus Watch App";
 			productReference = 53ADBD732B7B354E009EB5D5 /* WatchFocus Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -612,6 +647,8 @@
 				53ADBD912B7B354F009EB5D5 /* PBXTargetDependency */,
 			);
 			name = "WatchFocus Watch AppUITests";
+			packageProductDependencies = (
+			);
 			productName = "WatchFocus Watch AppUITests";
 			productReference = 53ADBD8F2B7B354F009EB5D5 /* WatchFocus Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -629,6 +666,10 @@
 			dependencies = (
 			);
 			name = WatchFocusWidgetExtension;
+			packageProductDependencies = (
+				53271E582B9F4ACB00C82C2D /* DYColor */,
+				53AAEB132BBA8DCA007FE2E2 /* RealmSwift */,
+			);
 			productName = WatchFocusWidgetExtension;
 			productReference = 53DFCD682B8E8F8100D9C2FE /* WatchFocusWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -679,6 +720,10 @@
 				Base,
 			);
 			mainGroup = 53ADBD442B7B354C009EB5D5;
+			packageReferences = (
+				53271E532B9F213B00C82C2D /* XCRemoteSwiftPackageReference "DYColor" */,
+				53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 53ADBD4E2B7B354D009EB5D5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -761,14 +806,18 @@
 				53ADBDBE2B7B3EB0009EB5D5 /* TodoStore.swift in Sources */,
 				53ADBDC42B7B56BA009EB5D5 /* TodoAddView.swift in Sources */,
 				53ADBDC12B7B42DD009EB5D5 /* Font+Extension.swift in Sources */,
+				53AAC6892BA0ACEE003401DD /* Date+Extension.swift in Sources */,
 				5391C7FB2B848E0900983B37 /* Int+Extension.swift in Sources */,
 				53ADBDB42B7B3774009EB5D5 /* Color+Extension.swift in Sources */,
+				53AAC6822BA0174A003401DD /* CategoryColorCode+Extension.swift in Sources */,
 				53ADBDBC2B7B3BBA009EB5D5 /* Double+Extension.swift in Sources */,
 				53DFCD812B8E914700D9C2FE /* WatchFocusWidgetLiveActivity.swift in Sources */,
 				53ADBDD62B7C5630009EB5D5 /* UserDefaultsKeys.swift in Sources */,
 				53B9ABBB2B9C756300EF5AF7 /* View+Extension.swift in Sources */,
 				53ADBDB72B7B3970009EB5D5 /* TodoRowView.swift in Sources */,
 				53ADBDC72B7B5733009EB5D5 /* WfProgressBar.swift in Sources */,
+				53DB6B682BA2E293000BB548 /* WfToastMessageView.swift in Sources */,
+				53AAC6872BA0A590003401DD /* ShareView.swift in Sources */,
 				53ADBDB92B7B39EA009EB5D5 /* ToDo.swift in Sources */,
 				53ADBDD22B7C545B009EB5D5 /* TimerStore.swift in Sources */,
 				53ADBD532B7B354D009EB5D5 /* ContentView.swift in Sources */,
@@ -776,10 +825,12 @@
 				53ADBDAF2B7B369E009EB5D5 /* TodoView.swift in Sources */,
 				53ADBDC92B7B5778009EB5D5 /* WfTodoTextField.swift in Sources */,
 				53ADBD512B7B354D009EB5D5 /* WatchFocusApp.swift in Sources */,
-				53B9ABB62B9AEB6100EF5AF7 /* WfColor.swift in Sources */,
+				53B9ABB62B9AEB6100EF5AF7 /* DYColor+Extension.swift in Sources */,
 				53ADBDCF2B7C4E1E009EB5D5 /* TimerSettingView.swift in Sources */,
 				53ADBDD42B7C5470009EB5D5 /* TimerSetting.swift in Sources */,
 				5391C8012B84D59100983B37 /* WfTimerProgressView.swift in Sources */,
+				53AAC6842BA03B53003401DD /* RowBackgroundView.swift in Sources */,
+				53648F942BA9E6A6004B82A1 /* AppIntent.swift in Sources */,
 				53DFF23F2B973FA10092A2D4 /* UserDefaults+Extension.swift in Sources */,
 				532402C92B8711150035A8FD /* AppDelegate.swift in Sources */,
 			);
@@ -808,19 +859,18 @@
 			files = (
 				5391C8052B84EFCD00983B37 /* TimerView.swift in Sources */,
 				5329BEFC2B8478FF004AFEAD /* TimerSetting.swift in Sources */,
-				5329BEFE2B84790C004AFEAD /* Color+Extension.swift in Sources */,
 				5391C7F22B848D1D00983B37 /* TodoView.swift in Sources */,
 				53ADBD7B2B7B354E009EB5D5 /* ContentView.swift in Sources */,
 				5391C7F72B848D6400983B37 /* TodoStore.swift in Sources */,
 				5329BEFF2B84790E004AFEAD /* Double+Extension.swift in Sources */,
 				5391C7F42B848D2500983B37 /* TimerSettingView.swift in Sources */,
-				53B9ABB82B9B49D800EF5AF7 /* WfColor.swift in Sources */,
 				5391C7FC2B848E0900983B37 /* Int+Extension.swift in Sources */,
 				539918942B85CB020019793B /* TimerStore.swift in Sources */,
 				5391C7FF2B84995000983B37 /* TodoRowView.swift in Sources */,
 				5329BF002B847912004AFEAD /* Font+Extension.swift in Sources */,
 				53ADBD792B7B354E009EB5D5 /* WatchFocusApp.swift in Sources */,
 				5329BEFD2B847902004AFEAD /* UserDefaultsKeys.swift in Sources */,
+				53271E572B9F49F700C82C2D /* Color+Extension.swift in Sources */,
 				5329BEFB2B8478FC004AFEAD /* ToDo.swift in Sources */,
 				5391C8022B84D59100983B37 /* WfTimerProgressView.swift in Sources */,
 			);
@@ -848,6 +898,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53DFCD872B8E977A00D9C2FE /* TimerSetting.swift in Sources */,
+				53648F932BA9DB32004B82A1 /* CategoryColorCode+Extension.swift in Sources */,
 				53DFCD702B8E8F8100D9C2FE /* WatchFocusWidgetBundle.swift in Sources */,
 				53DFF2432B97538C0092A2D4 /* UserDefaultsKeys.swift in Sources */,
 				53DFCD832B8E91AD00D9C2FE /* Color+Extension.swift in Sources */,
@@ -857,7 +908,7 @@
 				53DFCD862B8E91B700D9C2FE /* Int+Extension.swift in Sources */,
 				53DFCD762B8E8F8100D9C2FE /* AppIntent.swift in Sources */,
 				53DFCD722B8E8F8100D9C2FE /* WatchFocusWidgetLiveActivity.swift in Sources */,
-				53B9ABB72B9B49D700EF5AF7 /* WfColor.swift in Sources */,
+				53B9ABB72B9B49D700EF5AF7 /* DYColor+Extension.swift in Sources */,
 				53DFCD822B8E91A300D9C2FE /* WfProgressBar.swift in Sources */,
 				53DFCD852B8E91B300D9C2FE /* Font+Extension.swift in Sources */,
 				53DFCD742B8E8F8100D9C2FE /* WatchFocusWidget.swift in Sources */,
@@ -1089,6 +1140,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchFocus;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근 허용 - 사진 저장";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1124,6 +1176,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchFocus;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근 허용 - 사진 저장";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1451,6 +1504,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		53271E532B9F213B00C82C2D /* XCRemoteSwiftPackageReference "DYColor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bangtori/DYColor.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		53271E542B9F218400C82C2D /* DYColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53271E532B9F213B00C82C2D /* XCRemoteSwiftPackageReference "DYColor" */;
+			productName = DYColor;
+		};
+		53271E582B9F4ACB00C82C2D /* DYColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53271E532B9F213B00C82C2D /* XCRemoteSwiftPackageReference "DYColor" */;
+			productName = DYColor;
+		};
+		53AAEB0D2BBA8D98007FE2E2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		53AAEB0F2BBA8DAD007FE2E2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		53AAEB132BBA8DCA007FE2E2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AAEB0C2BBA8D61007FE2E2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 53ADBD452B7B354C009EB5D5 /* Project object */;
 }

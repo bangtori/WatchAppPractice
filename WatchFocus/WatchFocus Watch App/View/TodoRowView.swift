@@ -20,7 +20,7 @@ struct TodoRowView: View {
             }
             .buttonStyle(.plain)
             .font(Font.system(size: 30))
-            .foregroundStyle(Color.wfMainPurple)
+            .foregroundStyle(todo.category?.color.getColor() ?? .white)
             .padding(.trailing)
             
             VStack(alignment: .leading) {
@@ -49,4 +49,21 @@ struct TodoRowView: View {
 #Preview {
     TodoRowView(todo: Todo(title: "ss", deadline: Date().timeIntervalSince1970, createDate: Date().timeIntervalSince1970, isChecked: false))
         .environmentObject(TodoStore())
+}
+
+extension CategoryColorCode {
+    func getColor() -> Color {
+        switch self {
+        case .blue:
+            return .wfMainBlue
+        case .purple:
+            return .wfMainPurple
+        case .yellow:
+            return .wfCategoryYellow
+        case .green:
+            return .wfCategoryGreen
+        case .red:
+            return .wfCategoryRed
+        }
+    }
 }

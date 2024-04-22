@@ -15,6 +15,7 @@ struct WfTimerProgressView: View {
     }
     @Binding var currentTimer: CurretTimer
     var size: Size = .large
+    var progressColor: Color
     var progress: Double {
         let totalTime: Int
         switch currentTimer.timerType {
@@ -29,10 +30,6 @@ struct WfTimerProgressView: View {
         return Double(currentTimer.remainTime) / Double(totalTime)
     }
     
-    var progressColor: WfColor {
-        return currentTimer.timerType == .focus ? .wfMainPurple : .wfMainBlue
-    }
-    
     var body: some View {
         ZStack {
             Circle()
@@ -40,13 +37,13 @@ struct WfTimerProgressView: View {
             VStack {
                 Text("Session \(currentTimer.currentIterationCount)")
                     .font(.wfBody1Font)
-                    .foregroundStyle(progressColor.returnColor(scheme: scheme))
+                    .foregroundStyle(progressColor)
                 Text(currentTimer.remainTime.timeFormatting())
                     .font(size == .large ? .wfLargeTitleFont : .wfBody1Font)
             }
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(progressColor.returnColor(scheme: scheme), style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                .stroke(progressColor, style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .rotationEffect(Angle(degrees: -90))
         }
     }

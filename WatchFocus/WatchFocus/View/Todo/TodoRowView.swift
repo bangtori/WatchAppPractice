@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import DYColor
 
 struct TodoRowView: View {
+    @Environment(\.colorScheme) var scheme
     @EnvironmentObject private var todoStore: TodoStore
     var todo: Todo
     var body: some View {
@@ -20,7 +22,7 @@ struct TodoRowView: View {
             }
             .buttonStyle(.plain)
             .font(Font.system(size: 30))
-            .foregroundStyle(Color.wfMainPurple)
+            .foregroundStyle(todo.category?.color.getDYColor.dynamicColor ?? DYColor.wfBlackWhite.dynamicColor)
             .padding(.trailing)
             
             VStack(alignment: .leading) {
