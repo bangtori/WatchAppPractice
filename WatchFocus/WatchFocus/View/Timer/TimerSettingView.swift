@@ -87,12 +87,12 @@ struct TimerSettingView: View {
             Button {
                 isShowingAlert.toggle()
             } label: {
-                Text("Save Task")
+                Text("Save Setting")
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
                     .font(.wfBody1Font)
                     .foregroundStyle(Color.white)
-                    .background(DYColor.wfSubTitleText.dynamicColor)
+                    .background(DYColor.wfMainBlue.dynamicColor)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
             }
             .alert("타이머 설정", isPresented: $isShowingAlert) {
