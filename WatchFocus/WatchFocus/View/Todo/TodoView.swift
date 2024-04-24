@@ -65,12 +65,16 @@ struct TodoView: View {
                                     .foregroundStyle(selectedCategory == nil ? DYColor.wfBlackWhite.dynamicColor : DYColor.wfUnableCategory.dynamicColor)
                             }
                             Text("|")
-                            ForEach(todoStore.categorys) { category in
-                                Button {
-                                    selectedCategory = category
-                                } label: {
-                                    Text(category.name)
-                                        .foregroundStyle(selectedCategory?.id == category.id ? category.color.getDYColor.dynamicColor : DYColor.wfUnableCategory.dynamicColor)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(todoStore.categorys) { category in
+                                        Button {
+                                            selectedCategory = category
+                                        } label: {
+                                            Text(category.name)
+                                                .foregroundStyle(selectedCategory?.id == category.id ? category.color.getDYColor.dynamicColor : DYColor.wfUnableCategory.dynamicColor)
+                                        }
+                                    }
                                 }
                             }
                         }
