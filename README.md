@@ -48,7 +48,7 @@
   </tr>
 </table>
 
-####  ⏱️ Pomodoro Timer + 📱 Display Mode
+####  ⏱️ Pomodoro Timer
 <table align="center">
   <tr>
     <th><code>타이머 설정</code></th>
