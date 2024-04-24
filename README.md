@@ -40,13 +40,11 @@
     <th><code>할일 관리</code></th>
     <th><code>할일 추가</code></th>
     <th><code>공유하기</code></th>
-    <th><code>할일 관리 (워치)<code></th>
   </tr>
   <tr>
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/489c11d9-bf98-45ba-b2d4-919537a21483" alt="할일 관리">
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/635472bf-06d6-4f14-849a-5845da128904" alt="할일 추가"></td>
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/6aae809d-8a48-4bb3-b208-e393185242cf" alt="공유 하기"></td>
-    <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/699b47a7-51ba-42f0-a80f-96572a8828b8" alt="워치 할일 관리"></td>
   </tr>
 </table>
 
@@ -55,21 +53,30 @@
   <tr>
     <th><code>타이머 설정</code></th>
     <th><code>뽀모도로 타이머</code></th>
-    <th><code>타이머 (워치)</code></th>
-  </tr>
-  <tr>
+    </tr>
+      <tr>
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/35ce6f3d-66be-4dce-b497-32911a16d887" alt="타이머 설정"></td>
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/c343c464-6df2-4789-9243-d07b2c2672a5" alt="뽀모도로 타이머">
-    <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/bfa499b5-c448-4207-ac25-bd4e45109c1f" alt="타이머 워치"></td>
-  </tr>
+    </tr>
+  <tr>
     <th><code>Live Activity</code></th>
     <th><code>Dynamic Island</code></th>
-    <th><code>디스플레이 모드</code></th>
   </tr>
-  <tr>
+<tr>
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/de819831-f00d-43f2-ac55-2a5665c6f20e" alt="Live Activity"></td>
     <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/8454de76-67a7-40d0-ad48-053d4442308e" alt="Dynamic Island"></td>
-    <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/cc30d8a6-7df1-4490-9795-8388b15d7a84" alt="디스플레이모드"></td>
+  </tr>
+  </table>
+
+  #### ⌚️ Watch
+  <table align="center">
+  <tr>
+    <th><code>할일 관리 </code></th>
+    <th><code>타이머 </code></th>
+  </tr>
+  <tr>
+      <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/699b47a7-51ba-42f0-a80f-96572a8828b8" alt="워치 할일 관리"></td>
+    <td><img src="https://github.com/bangtori/WatchFocus/assets/58802345/bfa499b5-c448-4207-ac25-bd4e45109c1f" alt="타이머 워치" width="270"></td>
   </tr>
 </table>
 
